@@ -1,0 +1,24 @@
+---
+description: Wardogs AI Development Studio project structure
+alwaysApply: true
+---
+
+# Project Structure
+
+**Single source of truth:** `.ai/`
+
+| Directory | Purpose |
+|-----------|---------|
+| `.ai/agents/` | Role definitions (YAML) |
+| `.ai/skills/` | Reusable capabilities |
+| `.ai/workflows/` | End-to-end processes |
+| `.ai/standards/` | Engineering rules |
+| `.ai/templates/` | Document templates |
+
+**Adapters (do not duplicate content):**
+- `.cursor/rules/` → references `.ai/standards/`
+- `.claude/` → Claude Code integration
+
+**Collaboration:** `.ai/standards/collaboration.md` — Question → Options → Decision → Draft → Approval
+
+When implementing features, follow `.ai/workflows/new-feature.yaml`.

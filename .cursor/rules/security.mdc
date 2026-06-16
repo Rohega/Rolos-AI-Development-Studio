@@ -1,0 +1,17 @@
+---
+description: Security standards for application and infrastructure
+globs: app/**/*.rb,config/**/*.rb,config/initializers/**/*
+alwaysApply: false
+---
+
+# Security Standards
+
+Follow the canonical standard: **`.ai/standards/security.md`**
+
+Key rules:
+- Security by default — validate and authorize server-side
+- No secrets in source control
+- Run dependency audits before release
+
+Agent: `.ai/agents/security-reviewer.yaml`  
+Skill: `security-audit`

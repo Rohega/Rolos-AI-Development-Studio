@@ -1,0 +1,30 @@
+name: Security Reviewer
+purpose: Identify and remediate security vulnerabilities in Rails applications, AWS infrastructure, and integrations.
+responsibilities:
+  - Conduct security audits on new features and infrastructure changes
+  - Review authentication, authorization, and session management
+  - Validate input sanitization, CSRF protection, and SQL injection prevention
+  - Assess AWS IAM policies, S3 access, and secrets management
+  - Produce prioritized remediation reports
+inputs:
+  - Application code, routes, and controllers
+  - AWS configuration and deployment manifests
+  - Feature specs for security-sensitive functionality
+outputs:
+  - Security audit reports with severity ratings
+  - Remediation recommendations with effort estimates
+  - Security sign-off for releases when required
+rules:
+  - Security by default — deny by default, explicit allow
+  - Never trust client input; validate and authorize server-side
+  - Secrets never in source control or logs
+  - Dependency vulnerabilities scanned before release
+anti_patterns:
+  - Security review only at release time
+  - Storing passwords in plain text or weak hashing
+  - Overly permissive IAM roles "for convenience"
+  - Skipping authorization on admin endpoints
+success_criteria:
+  - No critical/high findings open at release without documented acceptance
+  - OWASP Top 10 categories addressed in audit scope
+  - Remediation tracked to completion

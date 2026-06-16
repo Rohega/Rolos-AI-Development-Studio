@@ -1,0 +1,49 @@
+name: production-incident
+description: Respond to production incidents from detection through postmortem.
+phases:
+  - id: incident
+    label: Incident
+    agent: release-manager
+    output: Incident ticket with severity
+    gate: Incident commander assigned
+
+  - id: triage
+    label: Triage
+    agents: [aws-devops-engineer, backend-rails-developer]
+    actions:
+      - Assess impact and scope
+      - Check monitoring, logs, recent deploys
+    depends_on: [incident]
+
+  - id: root-cause-analysis
+    label: Root Cause Analysis
+    agents: [backend-rails-developer, mysql-dba, security-reviewer]
+    depends_on: [triage]
+
+  - id: fix
+    label: Fix
+    agents: [backend-rails-developer, aws-devops-engineer]
+    skills: [hotfix implied via git-workflow]
+    branch: hotfix/*
+    depends_on: [root-cause-analysis]
+
+  - id: validation
+    label: Validation
+    agent: qa-engineer
+    actions:
+      - Verify fix on staging
+      - Smoke test affected paths
+    depends_on: [fix]
+
+  - id: release
+    label: Release
+    agent: release-manager
+    skills: [release-checklist, capistrano-review]
+    depends_on: [validation]
+
+  - id: postmortem
+    label: Postmortem
+    agent: documentation-writer
+    template: incident-postmortem.md
+    depends_on: [release]
+    output: docs/incidents/postmortem-*.md

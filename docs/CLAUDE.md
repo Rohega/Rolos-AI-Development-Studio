@@ -1,33 +1,24 @@
 # Docs Directory
 
-When authoring or editing files in this directory, follow these standards.
+Project documentation for Wardogs AI Development Studio and consuming applications.
 
-## Architecture Decision Records (`docs/architecture/`)
+## Structure
 
-Use the ADR template: `.claude/docs/templates/architecture-decision-record.md`
+| Path | Purpose |
+|------|---------|
+| `docs/integrations/` | Per-platform AI setup (Cursor, Claude, Codex, …) |
+| `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` | Full collaboration protocol with examples |
+| `docs/architecture/` | ADRs for your application (create when building) |
+| `docs/specs/` | Feature specifications |
+| `docs/stories/` | User stories |
+| `docs/modules/` | Module documentation |
+| `docs/runbooks/` | Operational runbooks |
 
-**Required sections:** Title, Status, Context, Decision, Consequences,
-ADR Dependencies, Engine Compatibility, GDD Requirements Addressed
+## Canonical Standards
 
-**Status lifecycle:** `Proposed` → `Accepted` → `Superseded`
-- Never skip `Accepted` — stories referencing a `Proposed` ADR are auto-blocked
-- Use `/architecture-decision` to create ADRs through the guided flow
+Engineering rules live in **`.ai/standards/`** — not duplicated here.
 
-**TR Registry:** `docs/architecture/tr-registry.yaml`
-- Stable requirement IDs (e.g. `TR-MOV-001`) that link GDD requirements to stories
-- Never renumber existing IDs — only append new ones
-- Updated by `/architecture-review` Phase 8
+## ADRs
 
-**Control Manifest:** `docs/architecture/control-manifest.md`
-- Flat programmer rules sheet: Required / Forbidden / Guardrails per layer
-- Date-stamped `Manifest Version:` in header
-- Stories embed this version; `/story-done` checks for staleness
-
-**Validation:** Run `/architecture-review` after completing a set of ADRs.
-
-## Engine Reference (`docs/engine-reference/`)
-
-Version-pinned engine API snapshots. **Always check here before using any
-engine API** — the LLM's training data predates the pinned engine version.
-
-Current engine: see `docs/engine-reference/godot/VERSION.md`
+Use template: `.ai/templates/architecture-decision-record.md`  
+Store in: `docs/architecture/adr-NNNN-slug.md`

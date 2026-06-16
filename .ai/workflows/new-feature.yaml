@@ -1,0 +1,50 @@
+name: new-feature
+description: End-to-end workflow from idea through release for new software features.
+phases:
+  - id: idea
+    label: Idea
+    agent: product-owner
+    skill: create-feature-spec
+    output: docs/specs/feature-*.md
+    gate: Product Owner approval
+
+  - id: user-stories
+    label: User Stories
+    agent: product-owner
+    skill: create-user-stories
+    output: docs/stories/*.md
+    depends_on: [idea]
+
+  - id: architecture
+    label: Architecture
+    agent: rails-architect
+    skill: create-architecture-plan
+    output: docs/architecture/adr-*.md
+    depends_on: [user-stories]
+    gate: ADR Accepted for significant decisions
+
+  - id: implementation
+    label: Implementation
+    agents: [backend-rails-developer, frontend-react-inertia-developer]
+    skills: [create-api-endpoints, review-db-migrations]
+    depends_on: [architecture]
+
+  - id: review
+    label: Review
+    agent: code-reviewer
+    skills: [review-rails-models, security-audit]
+    depends_on: [implementation]
+    gate: No BLOCKING findings
+
+  - id: qa
+    label: QA
+    agent: qa-engineer
+    skill: qa-plan
+    depends_on: [review]
+    gate: QA sign-off
+
+  - id: release
+    label: Release
+    agent: release-manager
+    skills: [release-checklist, capistrano-review]
+    depends_on: [qa]

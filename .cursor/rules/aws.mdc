@@ -1,0 +1,19 @@
+---
+description: AWS infrastructure and deployment standards
+globs: "**/*.{tf,yml,yaml}",config/deploy/**/*.rb,config/nginx/**/*
+alwaysApply: false
+---
+
+# AWS Standards
+
+Follow the canonical standard: **`.ai/standards/aws-infrastructure.md`**
+
+Key rules:
+- Infrastructure as Code — no console-only changes
+- Least-privilege IAM
+- Secrets in Parameter Store / credentials — never in repo
+- Every deployment plan includes rollback steps
+
+Agent: `.ai/agents/aws-devops-engineer.yaml`  
+Skills: `aws-deploy-plan`, `nginx-puma-review`, `capistrano-review`  
+Workflow: `.ai/workflows/aws-deployment.yaml`

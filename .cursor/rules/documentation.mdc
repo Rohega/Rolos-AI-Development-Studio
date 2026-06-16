@@ -1,0 +1,18 @@
+---
+description: Documentation standards
+globs: docs/**/*.md,README.md
+alwaysApply: false
+---
+
+# Documentation Standards
+
+Follow the canonical standard: **`.ai/standards/documentation.md`**
+
+Key rules:
+- Update docs in the same PR as behavior changes
+- ADRs in `docs/architecture/` for significant decisions
+- Module docs in `docs/modules/`
+
+Agent: `.ai/agents/documentation-writer.yaml`  
+Skill: `document-module`  
+Templates: `.ai/templates/`

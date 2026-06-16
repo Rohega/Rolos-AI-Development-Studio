@@ -1,54 +1,42 @@
-# Claude Code Game Studios -- Game Studio Agent Architecture
+# Wardogs AI Development Studio — Claude Code Adapter
 
-Indie game development managed through 49 coordinated Claude Code subagents.
-Each agent owns a specific domain, enforcing separation of concerns and quality.
+Vendor-neutral AI engineering framework. **Canonical definitions live in `.ai/`** — this file is the Claude Code entry point only.
 
-## Technology Stack
+## Single Source of Truth
 
-- **Engine**: [CHOOSE: Godot 4 / Unity / Unreal Engine 5]
-- **Language**: [CHOOSE: GDScript / C# / C++ / Blueprint]
-- **Version Control**: Git with trunk-based development
-- **Build System**: [SPECIFY after choosing engine]
-- **Asset Pipeline**: [SPECIFY after choosing engine]
-
-> **Note**: Engine-specialist agents exist for Godot, Unity, and Unreal with
-> dedicated sub-specialists. Use the set matching your engine.
-
-## Project Structure
-
-@.claude/docs/directory-structure.md
-
-## Engine Version Reference
-
-@docs/engine-reference/godot/VERSION.md
-
-## Technical Preferences
-
-@.claude/docs/technical-preferences.md
-
-## Coordination Rules
-
-@.claude/docs/coordination-rules.md
+| Path | Purpose |
+|------|---------|
+| `.ai/agents/` | Role definitions (YAML) |
+| `.ai/skills/` | Reusable capabilities |
+| `.ai/workflows/` | End-to-end processes |
+| `.ai/standards/` | Engineering rules |
+| `.ai/templates/` | Document templates |
 
 ## Collaboration Protocol
 
-**User-driven collaboration, not autonomous execution.**
-Every task follows: **Question -> Options -> Decision -> Draft -> Approval**
+@.ai/standards/collaboration.md
 
-- Agents MUST ask "May I write this to [filepath]?" before using Write/Edit tools
-- Agents MUST show drafts or summaries before requesting approval
-- Multi-file changes require explicit approval for the full changeset
-- No commits without user instruction
+Full examples: `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md`
 
-See `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` for full protocol and examples.
+## Standards
 
-> **First session?** If the project has no engine configured and no game concept,
-> run `/start` to begin the guided onboarding flow.
+@.ai/standards/rails-development.md
+@.ai/standards/aws-infrastructure.md
+@.ai/standards/mysql.md
+@.ai/standards/security.md
+@.ai/standards/testing.md
+@.ai/standards/git-workflow.md
 
-## Coding Standards
+## Claude Adapters
 
-@.claude/docs/coding-standards.md
+- Agents: `.claude/agents/` → delegate to `.ai/agents/*.yaml`
+- Skills: `.claude/skills/` → delegate to `.ai/skills/*/SKILL.md`
+- Hooks: `.claude/hooks/`
 
-## Context Management
+## Getting Started
 
-@.claude/docs/context-management.md
+1. Read `.ai/workflows/new-feature.yaml` for the default development flow
+2. Invoke skills with `/create-feature-spec`, `/qa-plan`, etc.
+3. Spawn agents per task — definitions in `.ai/agents/`
+
+See `docs/integrations/claude-code.md` for full setup.
