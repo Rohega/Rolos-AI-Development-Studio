@@ -130,4 +130,4 @@ Todas las P0 quedan **desbloqueadas para implementación** tras este review, con
 
 - [x] Rails Architect — **APPROVED WITH CONDITIONS** (2026-06-16)
 - [x] ADRs 0001–0005 — **Accepted**
-- [ ] MySQL DBA review — pendiente primer PR de migraciones
+- [x] MySQL DBA review — APPROVED WITH CONDITIONS (2026-06-16) — [migrations review](warehouse-mvp-migrations-review.md)

@@ -499,4 +499,4 @@ app/
 
 - [x] Product Owner sign-off
 - [x] Rails Architect review — APPROVED WITH CONDITIONS (2026-06-16)
-- [ ] MySQL DBA review — pendiente primer PR de migraciones
+- [x] MySQL DBA review — APPROVED WITH CONDITIONS (2026-06-16) — [migrations review](../architecture/warehouse-mvp-migrations-review.md)
