@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Rails Standards
 
-Follow the canonical standard: **`.ai/standards/rails-development.md`**
+Follow the canonical standard: **`.ai/standards/stacks/rails/development.md`**
 
 Key rules:
 - Rails conventions over custom abstractions
@@ -14,5 +14,5 @@ Key rules:
 - Strong parameters and authorization on every mutating action
 - Background jobs for async work
 
-Agent: `.ai/agents/backend-rails-developer.yaml`  
+Agent: `.ai/agents/stacks/rails/backend-rails-developer.yaml`  
 Skills: `review-rails-models`, `create-api-endpoints`, `review-db-migrations`

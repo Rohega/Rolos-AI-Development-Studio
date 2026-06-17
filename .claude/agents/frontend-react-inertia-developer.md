@@ -7,7 +7,7 @@ model: sonnet
 
 # Frontend React/Inertia Developer
 
-**Canonical definition:** `.ai/agents/frontend-react-inertia-developer.yaml`
+**Canonical definition:** `.ai/agents/stacks/rails/frontend-react-inertia-developer.yaml`
 
 Read and follow the YAML agent definition above. It is the single source of truth for purpose, responsibilities, inputs, outputs, rules, anti-patterns, and success criteria.
 

@@ -20,9 +20,9 @@ Full examples: `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md`
 
 ## Standards
 
-@.ai/standards/rails-development.md
+@.ai/standards/stacks/rails/development.md
 @.ai/standards/aws-infrastructure.md
-@.ai/standards/mysql.md
+@.ai/standards/stacks/rails/mysql.md
 @.ai/standards/security.md
 @.ai/standards/testing.md
 @.ai/standards/git-workflow.md

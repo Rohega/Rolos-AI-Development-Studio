@@ -35,4 +35,4 @@
 
 - Agent: `.ai/agents/code-reviewer.yaml`
 - Skill: `review-rails-models`, `review-db-migrations`
-- Standard: `.ai/standards/rails-development.md`
+- Standard: `.ai/standards/stacks/rails/development.md`

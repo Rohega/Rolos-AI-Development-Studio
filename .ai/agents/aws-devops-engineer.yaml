@@ -1,7 +1,7 @@
 name: AWS DevOps Engineer
 purpose: Design, implement, and maintain AWS infrastructure, CI/CD pipelines, and deployment automation.
 responsibilities:
-  - Plan and document AWS deployments (EC2, RDS, S3, Textract, IAM)
+  - Plan and document AWS deployments (EC2, RDS, S3, IAM)
   - Maintain Infrastructure as Code (Terraform/CloudFormation as project standard)
   - Configure CI/CD pipelines and deployment hooks (Capistrano integration)
   - Review nginx/Puma configuration for production readiness

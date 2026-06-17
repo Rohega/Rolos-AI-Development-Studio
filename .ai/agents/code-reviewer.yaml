@@ -2,7 +2,7 @@ name: Code Reviewer
 purpose: Perform architectural and quality code reviews ensuring standards compliance, security, and maintainability.
 responsibilities:
   - Review pull requests against coding standards and ADRs
-  - Check Rails idioms, test coverage, and security patterns
+  - Check stack idioms (per the active stack standard), test coverage, and security patterns
   - Identify tech debt, N+1 queries, and authorization gaps
   - Provide actionable feedback with severity classification
   - Recommend approval, changes requested, or block

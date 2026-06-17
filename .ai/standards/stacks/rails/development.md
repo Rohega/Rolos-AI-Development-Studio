@@ -1,5 +1,7 @@
 # Rails Development Standards
 
+> Stack: **rails** (reference stack). This file is the stack-specific development standard. Agnostic rules live in `.ai/standards/` (security, testing principles, api-design, git-workflow, …).
+
 ## Conventions
 
 - Follow Rails conventions over custom abstractions
@@ -32,7 +34,14 @@
 - Environment-specific config in credentials or ENV — never hardcode secrets
 - Feature flags for risky rollouts when appropriate
 
+## Tooling
+
+- Tests: RSpec (see `.ai/standards/testing.md` for the agnostic principles)
+- Lint: RuboCop — no new offenses in changed files
+- Dependencies: Bundler + `bundle audit`
+
 ## References
 
-- Agent: `.ai/agents/backend-rails-developer.yaml`
+- Agent: `.ai/agents/stacks/rails/backend-rails-developer.yaml`
+- Data layer: `.ai/standards/stacks/rails/mysql.md`
 - Skills: `review-rails-models`, `create-api-endpoints`

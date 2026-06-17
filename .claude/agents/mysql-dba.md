@@ -7,7 +7,7 @@ model: sonnet
 
 # MySQL DBA
 
-**Canonical definition:** `.ai/agents/mysql-dba.yaml`
+**Canonical definition:** `.ai/agents/stacks/rails/mysql-dba.yaml`
 
 Read and follow the YAML agent definition above. It is the single source of truth for purpose, responsibilities, inputs, outputs, rules, anti-patterns, and success criteria.
 

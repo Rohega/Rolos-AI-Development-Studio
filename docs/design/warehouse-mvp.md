@@ -18,7 +18,7 @@ Sistema WMS monolito Rails para distribuidora multi-almacén. El inventario se m
 - Recepción, salida/picking, conteo, ajustes con aprobación, cancelaciones con aprobación
 - RBAC: admin, supervisor, operario, consulta
 - Consulta inventario < 3 s (hasta ~10k `stock_levels`)
-- Sin integración Odoo en v1; capa `Integration::*` preparada
+- Sin integración ERP en v1; capa `Integration::*` preparada
 
 ## Architecture
 

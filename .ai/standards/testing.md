@@ -1,36 +1,42 @@
 # Testing Standards
 
+> Agnostic principles. Stack-specific tooling (frameworks, runners, factory libs)
+> lives in the active stack standard under `.ai/standards/stacks/<stack>/`.
+
 ## Pyramid
 
-1. **Unit** — models, services, parsers (fast, isolated)
-2. **Integration** — API endpoints, job execution with test DB
-3. **System/E2E** — Capybara for critical user journeys (few, stable)
+1. **Unit** — pure logic, models, services, parsers (fast, isolated)
+2. **Integration** — API endpoints, persistence, background work against a test DB
+3. **System/E2E** — end-to-end critical user journeys (few, stable)
 
-## RSpec Conventions
+## Conventions
 
-- File: `spec/models/invoice_spec.rb`
-- Describe blocks match class/method under test
-- One expectation per example when practical
-- Use factories (FactoryBot), not fixtures for dynamic data
+- Test files mirror the structure of the code under test
+- Describe/group blocks match the class/method/handler under test
+- One logical assertion per test when practical
+- Prefer factories/builders over static fixtures for dynamic data
+- Choose the concrete framework and helpers from the stack standard
+  (e.g. Rails: RSpec + FactoryBot + Capybara)
 
 ## Coverage Expectations
 
 | Layer | Minimum |
 |-------|---------|
-| Models / services | Critical paths covered |
+| Core logic / services | Critical paths covered |
 | API endpoints | Happy path + auth failure + validation errors |
-| Jobs | Success + retryable failure |
-| Migrations | Rollback tested on copy of schema |
+| Async / jobs | Success + retryable failure |
+| Migrations / schema | Rollback or forward-compat tested |
 
 ## CI
 
 - Full suite on every PR to main
-- Fail build on test failure — no `pending` without ticket reference
+- Fail build on test failure — no skipped/pending tests without a ticket reference
+- Dependency and security scans run in the same pipeline
 
 ## Evidence
 
 - QA test plan maps stories to automated vs manual tests
-- Bug fixes include regression spec when feasible
+- Bug fixes include a regression test when feasible
 
 ## References
 

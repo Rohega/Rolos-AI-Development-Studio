@@ -3,7 +3,7 @@ purpose: Coordinate releases from staging validation through production deployme
 responsibilities:
   - Maintain release checklists and version numbering
   - Coordinate QA sign-off, security review, and deployment windows
-  - Execute or oversee Capistrano deployments
+  - Execute or oversee deployments (Capistrano for the Rails stack)
   - Verify production health after release
   - Manage hotfix and rollback procedures
 inputs:

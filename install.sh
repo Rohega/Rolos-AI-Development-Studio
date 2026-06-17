@@ -38,6 +38,7 @@ CORE_ITEMS=(
   "docs/integrations"
   "docs/CLAUDE.md"
   "docs/COLLABORATIVE-DESIGN-PRINCIPLE.md"
+  "docs/ADDING-A-LANGUAGE.md"
   ".github/copilot-instructions.md"
 )
 
@@ -82,7 +83,8 @@ OPTIONS:
 WHAT GETS COPIED (core):
   .ai/  .cursor/  .claude/{agents,hooks,skills,settings.json}
   CLAUDE.md  docs/integrations/  docs/CLAUDE.md
-  docs/COLLABORATIVE-DESIGN-PRINCIPLE.md  .github/copilot-instructions.md
+  docs/COLLABORATIVE-DESIGN-PRINCIPLE.md  docs/ADDING-A-LANGUAGE.md
+  .github/copilot-instructions.md
   + empty docs/ scaffolding (architecture, specs, stories, design, runbooks, modules)
 
 WHAT IS EXCLUDED:

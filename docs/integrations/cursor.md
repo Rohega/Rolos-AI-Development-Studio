@@ -11,10 +11,10 @@
 | Cursor Rule | Canonical Standard |
 |-------------|-------------------|
 | `project-structure.mdc` | `.ai/` layout (always applied) |
-| `rails.mdc` | `.ai/standards/rails-development.md` |
+| `rails.mdc` | `.ai/standards/stacks/rails/development.md` |
 | `aws.mdc` | `.ai/standards/aws-infrastructure.md` |
 | `security.mdc` | `.ai/standards/security.md` |
-| `database.mdc` | `.ai/standards/mysql.md` |
+| `database.mdc` | `.ai/standards/stacks/rails/mysql.md` |
 | `documentation.mdc` | `.ai/standards/documentation.md` |
 
 ## Invoking Skills
@@ -28,7 +28,7 @@ Follow .ai/skills/create-feature-spec/SKILL.md to draft a feature spec for [idea
 ## Invoking Agents
 
 ```
-Act as the agent defined in .ai/agents/rails-architect.yaml. Review this design.
+Act as the agent defined in .ai/agents/stacks/rails/rails-architect.yaml. Review this design.
 ```
 
 ## Workflows
@@ -46,15 +46,15 @@ workflows you point the agent at the canonical file in `.ai/`. Copy-paste prompt
 
 ```
 Act as the agent in .ai/agents/product-owner.yaml and follow
-.ai/skills/create-feature-spec/SKILL.md to draft a spec for "invoice OCR upload".
-Ask me questions first, then save it to docs/specs/invoice-ocr.md.
+.ai/skills/create-feature-spec/SKILL.md to draft a spec for "multi-warehouse stock transfer".
+Ask me questions first, then save it to docs/specs/stock-transfer.md.
 ```
 
 ### 2. Review a model against the standards (agent + standard)
 
 ```
 Act as the agent in .ai/agents/code-reviewer.yaml. Review app/models/invoice.rb
-against .ai/standards/rails-development.md and .ai/standards/security.md.
+against .ai/standards/stacks/rails/development.md and .ai/standards/security.md.
 List issues by severity; do not edit files yet.
 ```
 
@@ -68,7 +68,7 @@ Stop after each phase and wait for my approval before continuing.
 ### 4. Architecture decision (agent + template)
 
 ```
-Act as the agent in .ai/agents/rails-architect.yaml. Using the template
+Act as the agent in .ai/agents/stacks/rails/rails-architect.yaml. Using the template
 .ai/templates/architecture-decision-record.md, propose an ADR for choosing
 between Sidekiq and Solid Queue. Save it to docs/architecture/adr-0001-job-backend.md.
 ```

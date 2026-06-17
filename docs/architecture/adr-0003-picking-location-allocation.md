@@ -53,6 +53,6 @@ Campo `sequence` en `picking_lines` asignado tras ordenar líneas generadas por 
 
 ## Compliance
 
-- Standards: `.ai/standards/rails-development.md`
+- Standards: `.ai/standards/stacks/rails/development.md`
 - Stories blocked until Accepted: US-021, US-022
 - Depends on: ADR-0002

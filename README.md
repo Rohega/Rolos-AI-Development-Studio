@@ -1,6 +1,6 @@
 # Rolos AI Development Studio
 
-**Vendor-neutral AI engineering framework** for Rails, React/Inertia, AWS, MySQL, Odoo, and Textract workflows.
+**Vendor-neutral, multi-stack AI engineering framework.** Rails (with React/Inertia, AWS, MySQL) ships as the reference stack, and the `.ai/` structure is designed to add new language stacks without duplicating the agnostic core.
 
 Use it with Cursor, Claude Code, OpenAI Codex, ChatGPT, GitHub Copilot, Gemini, or future AI coding agents. The canonical definitions live in `.ai/` — platform folders are thin adapters only.
 
@@ -10,9 +10,9 @@ Use it with Cursor, Claude Code, OpenAI Codex, ChatGPT, GitHub Copilot, Gemini, 
 
 Rolos AI Development Studio structures AI-assisted software engineering like a real team:
 
-- **13 specialized agents** (Product Owner, Rails Architect, DevOps, DBA, Security, QA, …)
-- **15 reusable skills** (feature specs, architecture, code review, deployments, OCR pipeline, …)
-- **4 end-to-end workflows** (new feature, production incident, AWS deploy, OCR processing)
+- **11 specialized agents** (Product Owner, Rails Architect, DevOps, DBA, Security, QA, …)
+- **15 reusable skills** (feature specs, architecture, code review, deployments, …)
+- **3 end-to-end workflows** (new feature, production incident, AWS deploy)
 - **9 engineering standards** (Rails, AWS, MySQL, API, security, testing, …)
 - **7 document templates** (feature spec, ADR, QA plan, release checklist, …)
 
@@ -72,21 +72,31 @@ Full step-by-step guide: [docs/INSTALL.md](docs/INSTALL.md).
 
 ```text
 .ai/                    # SINGLE SOURCE OF TRUTH
-  agents/               # Role definitions (YAML)
+  agents/               # Agnostic role definitions (YAML)
+    stacks/<stack>/     # Stack-specific roles (Rails = reference)
   skills/               # Reusable capabilities
   workflows/            # End-to-end processes
-  standards/            # Engineering rules
+  standards/            # Agnostic engineering rules
+    stacks/<stack>/     # Stack-specific standards (Rails = reference)
   templates/            # Document templates
 
 .cursor/rules/          # Cursor adapter → .ai/standards/
 .claude/                # Claude Code adapter → .ai/
 
 docs/
+  ADDING-A-LANGUAGE.md  # How to add a new language stack
   integrations/         # Per-platform setup guides
   COLLABORATIVE-DESIGN-PRINCIPLE.md
 
 archive/game-studio-original/   # Previous game-studio framework (preserved)
 ```
+
+## Multi-Stack
+
+Rails is the **reference stack**. The agnostic core lives at the root of `.ai/standards/`
+and `.ai/agents/`; language-specific guidance lives under `stacks/<stack>/`. To add a
+language (Python, Node, Go, …), follow [docs/ADDING-A-LANGUAGE.md](docs/ADDING-A-LANGUAGE.md)
+and the `stacks/_TEMPLATE/` skeletons.
 
 ---
 
@@ -94,7 +104,7 @@ archive/game-studio-original/   # Previous game-studio framework (preserved)
 
 1. Open the project in Cursor — rules in `.cursor/rules/` load automatically.
 2. `project-structure.mdc` is always applied; others activate by file glob.
-3. Ask the agent to follow a workflow: *"Run the new feature workflow for invoice OCR"*
+3. Ask the agent to follow a workflow: *"Run the new feature workflow for multi-warehouse stock transfer"*
 4. Point to canonical skills: *"Use `.ai/skills/create-feature-spec/SKILL.md`"*
 
 See [docs/integrations/cursor.md](docs/integrations/cursor.md).
@@ -142,7 +152,7 @@ Idea → User Stories → Architecture → Implementation → Review → QA → 
 | QA | `qa-plan` | QA Engineer |
 | Release | `release-checklist` | Release Manager |
 
-Standards: `.ai/standards/rails-development.md`, `mysql.md`, `testing.md`
+Standards: `.ai/standards/stacks/rails/development.md`, `.ai/standards/stacks/rails/mysql.md`, `.ai/standards/testing.md`
 
 ---
 
@@ -165,18 +175,18 @@ Standard: `.ai/standards/aws-infrastructure.md`
 - Follow `.ai/standards/security.md` on every feature
 - Run `security-audit` before production releases
 - Never commit secrets — hooks warn on staged credential patterns
-- IAM least privilege for Textract, S3, and RDS
+- IAM least privilege for S3, RDS, and every service role
 - Dependency scanning (`bundle audit`) in CI
 
 ---
 
 ## Example Feature Lifecycle
 
-1. **Product Owner** drafts `docs/specs/feature-invoice-ocr.md` via `create-feature-spec`
-2. **Stories** → `docs/stories/invoice-ocr/US-001.md`
-3. **Rails Architect** writes `docs/architecture/adr-0001-textract-pipeline.md`
-4. **Backend Developer** implements models, jobs, Textract client
-5. **Textract OCR Specialist** validates OCR workflow per `.ai/workflows/ocr-processing.yaml`
+1. **Product Owner** drafts `docs/specs/feature-stock-transfer.md` via `create-feature-spec`
+2. **Stories** → `docs/stories/stock-transfer/US-001.md`
+3. **Rails Architect** writes `docs/architecture/adr-0001-stock-transfer-flow.md`
+4. **Backend Developer** implements models, jobs, and service objects
+5. **Frontend Developer** builds the Inertia/React screens
 6. **Code Reviewer** runs `review-rails-models` + `security-audit`
 7. **QA Engineer** produces QA plan; smoke test on staging
 8. **Release Manager** completes checklist; Capistrano deploy to production

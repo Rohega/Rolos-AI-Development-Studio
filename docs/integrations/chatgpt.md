@@ -25,7 +25,7 @@ Upload these to the project knowledge base:
 
 - `.ai/README.md`
 - `.ai/standards/collaboration.md`
-- `.ai/standards/rails-development.md`
+- `.ai/standards/stacks/rails/development.md`
 - `.ai/workflows/new-feature.yaml`
 - Relevant agent YAML and skill for your current task
 

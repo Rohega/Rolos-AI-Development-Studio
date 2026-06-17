@@ -19,7 +19,7 @@ Systematically audit application and infrastructure for security vulnerabilities
 1. **Scope** — Define audit boundary (app, AWS, integrations).
 2. **OWASP scan** — Injection, auth, XSS, CSRF, misconfiguration, etc.
 3. **Rails review** — Strong params, mass assignment, authorization gaps.
-4. **AWS review** — IAM, S3 policies, secrets, Textract permissions.
+4. **AWS review** — IAM, S3 policies, secrets, service permissions.
 5. **Dependencies** — Known CVEs in Gemfile.lock.
 6. **Prioritize** — Critical/High/Medium/Low with remediation steps.
 7. **Report** — Sign-off recommendation for release.

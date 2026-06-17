@@ -19,7 +19,7 @@
 
 - No long-lived access keys on EC2 — use instance profiles
 - S3 bucket policies deny public access by default
-- Textract and S3 access scoped to required prefixes
+- Service access scoped to required prefixes / least privilege
 - CloudTrail enabled for audit
 
 ## Secrets

@@ -6,12 +6,12 @@ alwaysApply: false
 
 # Database Standards
 
-Follow the canonical standard: **`.ai/standards/mysql.md`**
+Follow the canonical standard: **`.ai/standards/stacks/rails/mysql.md`**
 
 Key rules:
 - Reversible migrations when possible
 - Index all foreign keys
 - Large table DDL requires online schema change strategy
 
-Agent: `.ai/agents/mysql-dba.yaml`  
+Agent: `.ai/agents/stacks/rails/mysql-dba.yaml`  
 Skills: `review-db-migrations`, `sql-review`

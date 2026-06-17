@@ -8,7 +8,7 @@ Produce architecture decisions and technical design for a feature before impleme
 
 - User stories and feature specification
 - Existing ADRs in `docs/architecture/`
-- Standards: `.ai/standards/rails-development.md`, `.ai/standards/api-design.md`
+- Standards: `.ai/standards/stacks/rails/development.md`, `.ai/standards/api-design.md`
 - Template: `.ai/templates/technical-design-document.md`, `.ai/templates/architecture-decision-record.md`
 
 ## Outputs
@@ -23,7 +23,7 @@ Produce architecture decisions and technical design for a feature before impleme
 3. **Present options** — 2–3 alternatives with pros/cons per decision.
 4. **Draft ADRs** — Status Proposed; user accepts → Accepted.
 5. **Draft technical design** — Components, data model, APIs, security.
-6. **Review dependencies** — Odoo, Textract, AWS integration points.
+6. **Review dependencies** — AWS and external system integration points.
 7. **Approve** — Block implementation until ADRs Accepted for governing decisions.
 
 ## Validation Checklist

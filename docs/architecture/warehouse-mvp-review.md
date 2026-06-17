@@ -23,7 +23,7 @@ La implementación puede iniciar en **Fase 0** (`auth-rbac`, `master-data`, `sto
 | [ADR-0002](adr-0002-outbound-stock-reservations.md) | Reservas location-level al iniciar picking | Accepted |
 | [ADR-0003](adr-0003-picking-location-allocation.md) | Greedy por orden de ubicación | Accepted |
 | [ADR-0004](adr-0004-warehouse-module-boundaries.md) | Namespace `Warehouse::` y estructura | Accepted |
-| [ADR-0005](adr-0005-erp-integration-layer.md) | Capa Integration sin acoplamiento Odoo | Accepted |
+| [ADR-0005](adr-0005-erp-integration-layer.md) | Capa Integration sin acoplamiento a ERP | Accepted |
 
 **Diseño técnico:** [warehouse-mvp.md](../design/warehouse-mvp.md)
 
@@ -35,7 +35,7 @@ La implementación puede iniciar en **Fase 0** (`auth-rbac`, `master-data`, `sto
 2. **Auditoría append-only** bien planteada; encaja con cancelaciones compensatorias.
 3. **Aprobaciones acotadas** solo donde hay riesgo (ajustes, cancelaciones) — reduce fricción operativa.
 4. **Multi-almacén** con transferencias en dos fases es el mínimo viable correcto para distribuidora.
-5. **Preparación Odoo** sin sobre-ingeniería (importer + external_references).
+5. **Preparación ERP** sin sobre-ingeniería (importer + external_references).
 
 ---
 
@@ -49,7 +49,7 @@ La implementación puede iniciar en **Fase 0** (`auth-rbac`, `master-data`, `sto
 | B2 | Momento y granularidad de reservas no definidos | ADR-0002 reserva al `start_picking`, por ubicación |
 | B3 | Algoritmo de picking ambiguo ("FIFO") | ADR-0003 greedy por aisle/rack/position |
 | B4 | Estructura de código para 3 devs en paralelo | ADR-0004 namespace `Warehouse::` |
-| B5 | Integración Odoo sin patrón | ADR-0005 `Integration::*` + `ExternalReference` |
+| B5 | Integración ERP sin patrón | ADR-0005 `Integration::*` + `ExternalReference` |
 
 ### CONCERNS (condiciones de implementación)
 

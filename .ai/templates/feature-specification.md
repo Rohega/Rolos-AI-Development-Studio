@@ -34,7 +34,7 @@
 
 ## Technical Considerations
 
-- [Known integrations: Odoo, Textract, AWS, etc.]
+- [Known integrations: AWS, ERP/third-party APIs, etc.]
 - [Performance or security constraints]
 - [ADR needed? Y/N]
 

@@ -16,7 +16,7 @@ Una empresa distribuidora/comercializadora opera varios almacenes con control de
 
 - **Sector:** Distribución / comercialización de productos físicos.
 - **Operación:** Múltiples almacenes (sedes o centros de distribución), recepción de proveedores, preparación de pedidos de clientes, transferencias entre almacenes.
-- **v1:** Arranque en blanco; sin integración Odoo. Arquitectura preparada para importadores/servicios futuros.
+- **v1:** Arranque en blanco; sin integración ERP. Arquitectura preparada para importadores/servicios futuros.
 
 ---
 
@@ -24,12 +24,12 @@ Una empresa distribuidora/comercializadora opera varios almacenes con control de
 
 | # | Tema | Decisión |
 |---|------|----------|
-| D1 | ERP | Arranque en blanco. Sin Odoo en v1. Preparar capa de integración (`Integration::*`, referencias externas, importadores). |
+| D1 | ERP | Arranque en blanco. Sin ERP en v1. Preparar capa de integración (`Integration::*`, referencias externas, importadores). |
 | D2 | Código de barras | No obligatorio. Búsqueda por SKU, nombre y categoría. Campo `barcode` opcional en productos. |
 | D3 | Unidades | Enum fijo: `unidad`, `caja`, `paquete`, `kg`, `litro`. Sin conversiones automáticas en v1. Modelo extensible para conversiones futuras. |
 | D4 | Aprobaciones | Salidas normales sin aprobación. Sí requieren aprobación de supervisor: ajustes manuales, correcciones de stock (conteo) y cancelaciones de movimientos confirmados. |
 | D5 | Alcance geográfico | Multi-almacén incluido en MVP (gestión de almacenes, stock por almacén, transferencias). |
-| D6 | Integración futura | Patrón importer + `external_references` polimórficas; sin acoplar lógica de dominio a Odoo. |
+| D6 | Integración futura | Patrón importer + `external_references` polimórficas; sin acoplar lógica de dominio a un ERP. |
 
 ---
 
@@ -45,7 +45,7 @@ Una empresa distribuidora/comercializadora opera varios almacenes con control de
 
 ## Non-Goals (fuera de MVP)
 
-- Integración en tiempo real con Odoo u otro ERP
+- Integración en tiempo real con un ERP externo
 - Conversiones automáticas entre unidades de medida
 - Código de barras obligatorio o hardware de escaneo dedicado
 - App móvil nativa
@@ -301,12 +301,12 @@ erDiagram
 | reason | text | Obligatorio |
 | reversal_movement_id | FK, nullable | Movimiento compensatorio al aprobar |
 
-#### `external_references` (preparación Odoo)
+#### `external_references` (preparación ERP)
 | Campo | Tipo | Notas |
 |-------|------|-------|
 | referable_type | string | `Product`, `Warehouse`, etc. |
 | referable_id | bigint | |
-| source_system | string | Ej. `odoo` |
+| source_system | string | Ej. `erp` |
 | external_id | string | ID en sistema externo |
 | last_synced_at | datetime, nullable | |
 
@@ -450,14 +450,14 @@ gantt
 
 ---
 
-## Preparación integración Odoo (v2)
+## Preparación integración ERP (v2)
 
 ```
 app/
   services/
     integration/
       base_importer.rb       # interface común
-      product_importer.rb    # stub v1; implementación Odoo v2
+      product_importer.rb    # stub v1; implementación ERP v2
       import_result.rb
   models/
     external_reference.rb
@@ -466,7 +466,7 @@ app/
 **Contrato `ProductImporter#import(row)`:**
 - Input: `{ sku:, name:, category_name:, unit_type:, barcode: nil, external_id: }`
 - Output: `ImportResult` con producto creado/actualizado o errores de validación
-- Idempotente por `external_id` + `source_system: 'odoo'`
+- Idempotente por `external_id` + `source_system: 'erp'`
 
 ---
 
@@ -478,7 +478,7 @@ app/
 - **ADR-0002:** Reservas location-level al iniciar picking — [Accepted](../architecture/adr-0002-outbound-stock-reservations.md)
 - **ADR-0003:** Asignación greedy por orden de ubicación — [Accepted](../architecture/adr-0003-picking-location-allocation.md)
 - **ADR-0004:** Namespace `Warehouse::` y estructura de módulo — [Accepted](../architecture/adr-0004-warehouse-module-boundaries.md)
-- **ADR-0005:** Capa `Integration::*` para Odoo futuro — [Accepted](../architecture/adr-0005-erp-integration-layer.md)
+- **ADR-0005:** Capa `Integration::*` para ERP futuro — [Accepted](../architecture/adr-0005-erp-integration-layer.md)
 - Diseño técnico: [warehouse-mvp.md](../design/warehouse-mvp.md)
 - Revisión arquitectura: [warehouse-mvp-review.md](../architecture/warehouse-mvp-review.md) — **APPROVED WITH CONDITIONS**
 - Performance: índices en `stock_levels(warehouse_id, product_id)`, `stock_movements(product_id, occurred_at)`

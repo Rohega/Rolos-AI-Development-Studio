@@ -18,7 +18,7 @@ rules:
   - Every feature must have measurable acceptance criteria before development starts
   - Scope changes require explicit stakeholder acknowledgment
   - Prefer thin vertical slices over large batch releases
-  - Defer technical decisions to Rails Architect; focus on what and why
+  - Defer technical decisions to the stack architect; focus on what and why
 anti_patterns:
   - Writing implementation details or database schemas in feature specs
   - Changing scope mid-sprint without reprioritization

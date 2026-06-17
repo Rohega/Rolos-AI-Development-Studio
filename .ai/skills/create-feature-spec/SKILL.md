@@ -20,7 +20,7 @@ Guide collaborative authoring of a feature specification from a raw idea to an a
 2. **Draft goals** — Present measurable goals and explicit non-goals for approval.
 3. **Outline stories** — Summarize user stories table (not full stories yet).
 4. **Define acceptance criteria** — Testable criteria per story summary.
-5. **Flag technical scope** — Note integrations (Odoo, Textract, AWS) and ADR needs.
+5. **Flag technical scope** — Note integrations (AWS, ERP/third-party APIs) and ADR needs.
 6. **Draft document** — Fill template; show draft for review.
 7. **Approve** — Obtain Product Owner sign-off before marking Approved.
 

@@ -6,9 +6,9 @@ This directory is the **single source of truth** for all AI engineering definiti
 
 | Directory | Files | Description |
 |-----------|-------|-------------|
-| [agents/](agents/) | 13 YAML | Role definitions |
+| [agents/](agents/) | 11 YAML | Role definitions |
 | [skills/](skills/) | 15 skills | Reusable capabilities |
-| [workflows/](workflows/) | 4 YAML | End-to-end processes |
+| [workflows/](workflows/) | 3 YAML | End-to-end processes |
 | [standards/](standards/) | 10 MD | Engineering rules |
 | [templates/](templates/) | 7 MD | Document templates |
 
@@ -23,7 +23,7 @@ This directory is the **single source of truth** for all AI engineering definiti
 - product-owner, rails-architect, backend-rails-developer
 - frontend-react-inertia-developer, aws-devops-engineer, mysql-dba
 - security-reviewer, qa-engineer, documentation-writer
-- odoo-specialist, textract-ocr-specialist, release-manager, code-reviewer
+- release-manager, code-reviewer
 
 ## Design Principles
 

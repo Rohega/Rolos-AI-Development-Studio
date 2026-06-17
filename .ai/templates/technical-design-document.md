@@ -32,7 +32,7 @@
 
 ## API / Interface
 
-[Endpoints, Inertia pages, Odoo/Textract integration points]
+[Endpoints, Inertia pages, external integration points]
 
 ## Security
 

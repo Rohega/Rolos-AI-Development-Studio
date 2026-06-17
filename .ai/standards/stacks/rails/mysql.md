@@ -1,5 +1,7 @@
 # MySQL Standards
 
+> Stack: **rails** (reference stack). Data-layer standard for the Rails stack.
+
 ## Schema
 
 - Engine: InnoDB only
@@ -34,5 +36,5 @@
 
 ## References
 
-- Agent: `.ai/agents/mysql-dba.yaml`
+- Agent: `.ai/agents/stacks/rails/mysql-dba.yaml`
 - Skills: `review-db-migrations`, `sql-review`

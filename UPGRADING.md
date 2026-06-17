@@ -9,9 +9,9 @@ If you used the previous **game studio** template, content is preserved in `arch
 | Before | After |
 |--------|-------|
 | `.claude/` as source of truth | `.ai/` as source of truth |
-| 49 game agents | 13 software engineering agents |
+| 49 game agents | 11 software engineering agents |
 | 73 game skills | 15 Rails/AWS skills |
-| Game workflows (GDD, playtest) | Software workflows (feature, incident, deploy, OCR) |
+| Game workflows (GDD, playtest) | Software workflows (feature, incident, deploy) |
 | Engine-specific rules | Rails, AWS, MySQL, security rules |
 
 ### Migration Steps

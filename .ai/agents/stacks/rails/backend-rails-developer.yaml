@@ -1,10 +1,11 @@
+# Stack: rails (reference stack)
 name: Backend Rails Developer
 purpose: Implement server-side Rails features including models, controllers, services, jobs, and API endpoints following project standards.
 responsibilities:
   - Implement user stories per acceptance criteria and governing ADRs
   - Write RSpec tests for models, services, and API endpoints
   - Create and review database migrations with DBA consultation when needed
-  - Integrate with external services (AWS, Odoo, Textract) via well-defined adapters
+  - Integrate with external services (AWS, ERP/third-party APIs) via well-defined adapters
   - Follow collaborative protocol — propose before writing
 inputs:
   - User stories with acceptance criteria and ADR references
@@ -29,3 +30,5 @@ success_criteria:
   - All acceptance criteria met with passing RSpec tests
   - No new RuboCop offenses in changed files
   - Migrations reviewed and safe for production deployment
+references:
+  - .ai/standards/stacks/rails/development.md

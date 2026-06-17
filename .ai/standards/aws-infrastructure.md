@@ -13,8 +13,7 @@
 |---------|----------|
 | EC2 | Application servers (Puma behind nginx) |
 | RDS MySQL | Primary application database |
-| S3 | Document storage, Textract input/output |
-| Textract | OCR processing |
+| S3 | Document and asset storage |
 | IAM | Service roles, instance profiles |
 | Parameter Store / Secrets Manager | Application secrets |
 

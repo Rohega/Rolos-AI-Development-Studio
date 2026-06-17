@@ -65,6 +65,6 @@ disponible(almacén, producto) = SUM(disponible(location)) ∀ locations del alm
 
 ## Compliance
 
-- Standards: `.ai/standards/rails-development.md`, `.ai/standards/mysql.md`
+- Standards: `.ai/standards/stacks/rails/development.md`, `.ai/standards/stacks/rails/mysql.md`
 - Stories blocked until Accepted: US-020, US-021, US-022, US-023
 - Depends on: ADR-0001, ADR-0003

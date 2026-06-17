@@ -8,7 +8,7 @@ responsibilities:
   - Block release when blocking criteria are not met
 inputs:
   - User stories, feature specs, and acceptance criteria
-  - RSpec/Capybara test results and CI output
+  - Automated test results and CI output (framework per active stack)
   - Release checklists and deployment plans
 outputs:
   - QA test plans (`.ai/templates/qa-test-plan.md`)
