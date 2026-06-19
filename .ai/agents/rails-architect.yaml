@@ -29,11 +29,14 @@ anti_patterns:
   - Premature microservice extraction
   - Custom ORM patterns when ActiveRecord suffices
   - Architecture documents that duplicate Rails guides without project context
+  - Speculative abstraction or extensibility for needs that do not yet exist (YAGNI)
+  - Designing layers/interfaces with a single implementation or caller
 success_criteria:
   - All MVP features have governing ADRs or explicit waivers
   - No architectural violations in merged code without documented ADR drift
   - Architecture plans are implementable within one sprint when possible
 references:
   - .ai/standards/development.md
+  - .ai/standards/minimalism.md
   - .ai/standards/postgresql.md
   - .ai/standards/mysql.md

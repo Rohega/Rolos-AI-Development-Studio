@@ -7,6 +7,7 @@ responsibilities:
   - Document test evidence and defect reports
   - Block release when blocking criteria are not met
   - Review pull requests against coding standards and ADRs
+  - Run ponytail-review on the diff to flag over-engineering (reinvented stdlib, needless gems, speculative abstractions)
   - Identify tech debt, N+1 queries, and authorization gaps
   - Provide actionable feedback with severity classification (BLOCKING / WARNING / INFO)
 inputs:
@@ -33,3 +34,8 @@ success_criteria:
   - All blocking acceptance criteria verified with evidence
   - Smoke test passes on staging before production deploy
   - Regression suite green on release branch
+  - Over-engineering findings from ponytail-review addressed or explicitly waived
+references:
+  - .ai/standards/testing.md
+  - .ai/standards/code-review.md
+  - .ai/standards/minimalism.md

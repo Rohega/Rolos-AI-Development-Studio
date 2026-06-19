@@ -35,15 +35,16 @@ phases:
   - id: development
     label: Development
     agents: [backend-rails-developer, frontend-react-inertia-developer]
-    skills: [create-api-endpoints, review-db-migrations]
+    skills: [create-api-endpoints, review-db-migrations, ponytail-review]
     depends_on: [implementation-plan]
+    notes: Apply .ai/standards/minimalism.md while building — stdlib/Rails-native before new gems, deletion over addition.
 
   - id: testing
     label: Testing
     agent: qa-engineer
-    skills: [qa-plan, review-rails-models, security-audit]
+    skills: [qa-plan, review-rails-models, security-audit, ponytail-review]
     depends_on: [development]
-    gate: QA sign-off and no BLOCKING findings
+    gate: QA sign-off, no BLOCKING findings, and no unaddressed over-engineering (ponytail-review)
 
   - id: documentation
     label: Documentation
@@ -61,8 +62,10 @@ phases:
 
 design_principles:
   - Follow Rails conventions whenever possible.
+  - Apply minimalism (.ai/standards/minimalism.md) — YAGNI, stdlib/Rails-native before a gem, deletion over addition.
   - Avoid unnecessary abstractions.
   - Prefer Service Objects over fat controllers.
   - Prefer ActiveJob for async work.
   - Always generate migration strategies and rollback plans.
   - Always include security, monitoring, and deployment considerations.
+  - Never simplify away validation, error handling, security, accessibility, or required tests.

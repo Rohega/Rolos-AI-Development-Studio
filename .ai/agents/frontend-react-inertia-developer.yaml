@@ -31,6 +31,8 @@ anti_patterns:
   - Direct database access or secrets in frontend code
   - Uncontrolled global state for server-owned data
   - Shipping UI without keyboard navigation and focus management
+  - Reaching for a component/library when a native element covers it (e.g. <input type="date"> over a picker lib)
+  - Unrequested abstractions or wrapper components that only delegate
 success_criteria:
   - UI matches acceptance criteria across target browsers
   - Critical paths have automated component or E2E tests
@@ -39,4 +41,5 @@ references:
   - .ai/standards/frontend.md
   - .ai/standards/ux-accessibility.md
   - .ai/standards/development.md
+  - .ai/standards/minimalism.md
   - .ai/templates/ux-specification.md

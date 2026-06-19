@@ -1,0 +1,28 @@
+---
+description: Lazy senior engineer minimalism. Pick the simplest solution that works; never cut safety.
+globs:
+alwaysApply: true
+---
+
+# Minimalism — Lazy Senior Engineer
+
+Follow the canonical standard: **`.ai/standards/minimalism.md`**
+
+Lazy means efficient, not careless. The best code is the code never written.
+
+Before writing code, stop at the first rung that holds:
+
+1. Does this need to exist at all? (YAGNI)
+2. Does the stdlib / Rails core do it? Use it.
+3. Native platform/DB feature covers it? Use it (`<input type="date">`, unique index, DB default).
+4. Already-installed gem solves it? Use it — no new gem for a few lines.
+5. Can it be one line? One line.
+6. Only then: the minimum code that works.
+
+Rules: no unrequested abstractions, no boilerplate "for later", deletion over addition, fewest files, shortest diff. Mark deliberate simplifications with `# ponytail: <ceiling>, <upgrade path>`.
+
+Levels (default **full**): `lite` names the lazier alternative · `full` enforces the ladder · `ultra` deletes before adding.
+
+**Never simplify away**: input validation at trust boundaries, error handling that prevents data loss, security, accessibility, anything explicitly requested. Non-trivial logic leaves ONE runnable RSpec check behind. See `.ai/standards/testing.md`.
+
+Skills: `ponytail-review` (diff), `ponytail-audit` (repo), `ponytail-debt` (ledger).
