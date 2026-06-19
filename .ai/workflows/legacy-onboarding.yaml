@@ -21,7 +21,7 @@ phases:
   - id: risk-assessment
     label: Risk Assessment
     agent: rails-architect
-    skills: [tech-debt-analysis, reverse-document-legacy]
+    skills: [tech-debt-analysis, reverse-document-legacy, ponytail-audit]
     output: docs/tech-debt/register.md
     depends_on: [inventory]
     notes: Score risks by impact x effort. Flag end-of-life gems and Rails version risk.
@@ -45,6 +45,7 @@ phases:
 
 design_principles:
   - Understand before you touch — document the system before changing behavior.
+  - Apply minimalism (.ai/standards/minimalism.md) — collapse/delete inherited bloat rather than migrate it forward.
   - Characterize current behavior with tests before refactoring.
   - Strangler fig over big-bang rewrite; every step has a documented rollback.
   - Upgrade Rails one minor at a time, never skipping majors.

@@ -33,3 +33,4 @@ This directory is the **single source of truth** for all Ruby on Rails AI engine
 - Maintainable Code
 - Testable Code
 - Senior Engineer Standards
+- Minimalism — lazy senior engineer ([standards/minimalism.md](standards/minimalism.md)): YAGNI, stdlib/Rails-native first, deletion over addition, never cutting safety. Skills: `ponytail-review`, `ponytail-audit`, `ponytail-debt`.

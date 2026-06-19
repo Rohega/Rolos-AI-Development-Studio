@@ -25,9 +25,13 @@ anti_patterns:
   - N+1 queries without includes/preload
   - Skipping authorization because "it's internal"
   - Raw SQL without DBA or sql-review for complex queries
+  - Unrequested abstractions, single-implementation concerns, or service objects that wrap one model call
+  - Adding a new gem for what the stdlib, Rails core, or a few lines can do
+  - Boilerplate or scaffolding "for later"
 success_criteria:
   - All acceptance criteria met with passing RSpec tests
   - No new RuboCop offenses in changed files
   - Migrations reviewed and safe for production deployment
 references:
   - .ai/standards/development.md
+  - .ai/standards/minimalism.md
