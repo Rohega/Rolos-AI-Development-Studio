@@ -1,0 +1,52 @@
+name: legacy-onboarding
+description: End-to-end workflow to safely understand, document, and start modernizing an inherited or spec-less Ruby on Rails application.
+
+phases:
+  - id: discovery
+    label: Discovery
+    agent: documentation-writer
+    skill: reverse-document-legacy
+    output: docs/modules/_system-map.md
+    notes: Detect stack (Ruby, Rails, DB, key gems, Sidekiq/ActiveJob, Devise, ActiveAdmin). Read-only on application code.
+    gate: Scope and access confirmed with the user
+
+  - id: inventory
+    label: Inventory
+    agent: documentation-writer
+    skill: reverse-document-legacy
+    output: docs/modules/*.md
+    depends_on: [discovery]
+    notes: Per-module audits from .ai/templates/legacy-module-audit.md (models, routes, jobs, services, integrations, coverage).
+
+  - id: risk-assessment
+    label: Risk Assessment
+    agent: rails-architect
+    skills: [tech-debt-analysis, reverse-document-legacy]
+    output: docs/tech-debt/register.md
+    depends_on: [inventory]
+    notes: Score risks by impact x effort. Flag end-of-life gems and Rails version risk.
+
+  - id: reverse-documentation
+    label: Reverse Documentation
+    agent: documentation-writer
+    skill: reverse-document-legacy
+    output: docs/architecture/adr-*.md
+    depends_on: [risk-assessment]
+    notes: Retrospective ADRs from .ai/templates/retrospective-adr.md; mark confidence and evidence.
+
+  - id: modernization-plan
+    label: Modernization Plan
+    agent: rails-architect
+    skill: create-architecture-plan
+    output: docs/architecture/modernization-plan-*.md
+    depends_on: [reverse-documentation]
+    gate: Plan approved before any behavior change
+    notes: Use .ai/templates/modernization-plan.md. Strangler-fig sequencing, characterization test plan, Rails upgrade path, rollback.
+
+design_principles:
+  - Understand before you touch — document the system before changing behavior.
+  - Characterize current behavior with tests before refactoring.
+  - Strangler fig over big-bang rewrite; every step has a documented rollback.
+  - Upgrade Rails one minor at a time, never skipping majors.
+  - Keep behavior changes and refactors in separate PRs.
+  - Follow .ai/standards/legacy-rails.md throughout.

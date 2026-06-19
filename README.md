@@ -40,7 +40,7 @@ RoR Command Center structures AI-assisted Rails engineering like a real senior t
 
 - **8 specialists** (Product Owner, Rails Architect, Backend, Frontend, DevOps AWS, QA, Documentation, Security)
 - **Reusable skills** (feature specs, architecture, code review, UX specs, deployments, …)
-- **End-to-end workflows** (new feature, production incident, AWS deploy)
+- **End-to-end workflows** (new feature, legacy onboarding, production incident, AWS deploy)
 - **Engineering standards** (Rails, frontend, UX/accessibility, AWS, PostgreSQL/MySQL, API, security, testing, …)
 - **Document templates** (feature spec, ADR, UX spec, QA plan, release checklist, …)
 
