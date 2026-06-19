@@ -1,3 +1,177 @@
+> Language: English | [Español](#versión-en-español)
+
+# RoR Command Center — Migration Plan
+
+> Pivot of the framework from **agnostic / multi-stack** to a **Ruby on Rails specialist** called **RoR Command Center** (slug: `ror-command-center`).
+
+## 1. Context and goal
+
+The repository started as **Rolos AI Development Studio**, a *vendor-neutral* and multi-stack framework where Rails was just the "reference stack". The new purpose is the opposite:
+
+> We are **not** a generic agent framework. We accelerate production-grade Ruby on Rails development with proven architecture, conventions, and operational practices.
+
+### Core Philosophy
+
+- Rails First
+- Convention Over Configuration
+- Production Ready
+- AWS Native
+- Maintainable Code
+- Testable Code
+- Senior Engineer Standards
+
+### Platform specialization
+
+Ruby on Rails 7+ / 8+, PostgreSQL and MySQL, Sidekiq, ActiveJob, Devise, ActiveAdmin,
+Hotwire, React + Inertia, AWS, Docker, Capistrano, Kamal, REST APIs, Background
+Processing, OCR Pipelines, WhatsApp Integrations, Enterprise Applications.
+
+## 2. Final roster (8 agents)
+
+The prompt names 7 specialists; we add a dedicated **Security Engineer** as the 8th so we don't
+degrade security quality. The capabilities of the removed agents
+(DBA, code review, release, UX) are **folded** into the remaining ones, not lost.
+
+| # | Specialist | Absorbs from current agents |
+|---|---|---|
+| 1 | Product Owner | `product-owner` |
+| 2 | Rails Architect | `rails-architect` + `mysql-dba` (modeling, migrations, indexes) |
+| 3 | Backend Engineer | `backend-rails-developer` + DBA queries/optimization |
+| 4 | Frontend Engineer | `frontend-react-inertia-developer` + `ux-designer` (rails + agnostic) |
+| 5 | DevOps AWS Engineer | `aws-devops-engineer` + `release-manager` |
+| 6 | QA Engineer | `qa-engineer` + `code-reviewer` |
+| 7 | Documentation Engineer | `documentation-writer` |
+| 8 | Security Engineer | `security-reviewer` (kept dedicated) |
+
+Agents removed as a standalone role: `mysql-dba`, `code-reviewer`,
+`release-manager`, `ux-designer` (x2). Their responsibilities are documented
+inside the YAML of the agent that absorbs them.
+
+## 3. Pipeline (8 phases)
+
+Every feature request follows:
+
+```text
+Idea → Specification → Architecture → Implementation Plan → Development → Testing → Documentation → Deployment
+```
+
+Changes relative to the current `new-feature.yaml`:
+
+- Add an explicit **Implementation Plan** phase (between Architecture and Development).
+- Add an explicit **Documentation** phase (before Deployment).
+- Remove role resolution via `stacks.<stack>` mapping (no more multi-stack).
+
+## 4. Mandatory rules (output)
+
+- Follow Rails conventions whenever possible.
+- Avoid unnecessary abstractions.
+- Prefer Service Objects over fat controllers.
+- Prefer ActiveJob for async work.
+- Generate migration strategies and rollback plans.
+- Include security, monitoring, and deployment considerations.
+- Assume production deployment on AWS.
+- Output must always be actionable and production-focused.
+
+## 5. Execution phases
+
+### Phase 1 — Rebranding (`Rolos AI Development Studio` → `RoR Command Center`)
+
+Files with the old name to update:
+
+- [ ] `README.md` (title + "What Is This?" section)
+- [ ] `CLAUDE.md`
+- [ ] `.ai/README.md`
+- [ ] `.cursor/rules/project-structure.mdc`
+- [ ] `.github/copilot-instructions.md`
+- [ ] `docs/CLAUDE.md`
+- [ ] `docs/integrations/*` (cursor, claude-code, codex, chatgpt, copilot, gemini)
+- [ ] `docs/INSTALL.md`
+- [ ] `install.sh`
+- [ ] `CONTRIBUTING.md`
+- [ ] `UPGRADING.md`
+
+### Phase 2 — Philosophy
+
+- [ ] Insert **Core Philosophy** and specialization into `.ai/README.md` and `CLAUDE.md`.
+- [ ] Remove the "Vendor-neutral architecture" principle from `.ai/README.md`.
+- [ ] Rewrite the `README.md` description as a Rails specialist.
+
+### Phase 3 — Flatten the multi-stack structure
+
+- [ ] Move `.ai/agents/stacks/rails/*` → `.ai/agents/`
+- [ ] Move `.ai/standards/stacks/rails/*` → `.ai/standards/`
+- [ ] Remove `.ai/agents/stacks/`, `.ai/standards/stacks/`, `_TEMPLATE`
+- [ ] Remove `docs/ADDING-A-LANGUAGE.md`
+- [ ] Remove `.cursor/rules/stack-template.mdc.example`
+- [ ] Simplify `.ai/workflows/new-feature.yaml` (direct paths, no `stacks`)
+
+### Phase 4 — Collapse roster to 8 agents
+
+- [ ] Merge `mysql-dba` → `rails-architect.yaml`
+- [ ] Merge `code-reviewer` → `qa-engineer.yaml`
+- [ ] Merge `release-manager` → `aws-devops-engineer.yaml`
+- [ ] Merge `ux-designer` (x2) → `frontend-react-inertia-developer.yaml`
+- [ ] Keep `security-reviewer` as a dedicated agent (rename to Security Engineer)
+- [ ] Update the `.claude/agents/*.md` adapters
+- [ ] Update the Agent Roster in `.ai/README.md` and `README.md`
+
+### Phase 5 — 8-phase pipeline
+
+- [ ] Add `implementation-plan` and `documentation` phases to `new-feature.yaml`
+- [ ] Update the workflow table in `README.md`
+
+### Phase 6 — New technology coverage
+
+Standards to create in `.ai/standards/`:
+
+- [ ] `postgresql.md` (alongside `mysql.md`)
+- [ ] `sidekiq-activejob.md`
+- [ ] `devise-auth.md`
+- [ ] `activeadmin.md`
+- [ ] `hotwire.md`
+- [ ] `kamal-docker.md` (deploy alongside Capistrano)
+
+Skills to create in `.ai/skills/`:
+
+- [ ] `ocr-pipeline/SKILL.md`
+- [ ] `whatsapp-integration/SKILL.md`
+- [ ] Corresponding adapters in `.claude/skills/`
+
+### Phase 7 — Sync adapters and validate
+
+- [ ] Regenerate references in `.claude/` and `.cursor/rules/`
+- [ ] Validate that every `@.ai/...` path in `CLAUDE.md` resolves
+- [ ] Validate that `install.sh` copies the new paths (without `stacks/`)
+- [ ] Review the `examples/warehouse-wms` example for broken references
+
+## 6. Risks
+
+| Risk | Mitigation |
+|---|---|
+| Broken `@.ai/standards/stacks/rails/*` paths in `CLAUDE.md` | Update all after flattening (Phase 3 + 7) |
+| `install.sh` references `stacks/` or the old name | Review in Phase 1 and 7 |
+| `warehouse-wms` example with old name/paths | Audit in Phase 7 (non-blocking) |
+| Capability loss when collapsing agents | Fold responsibilities into the target YAML |
+| Postgres + MySQL: standards divergence | Document key differences in each DB standard |
+
+## 7. Final validation
+
+- [x] `grep` for "Rolos" and "vendor-neutral" → 0 results in active paths (outside `archive/` and this plan)
+- [x] `grep` for `stacks/` → 0 results in active paths
+- [x] Roster = 8 agents in `.ai/agents/` and `.claude/agents/`
+- [x] Pipeline = 8 phases in `new-feature.yaml` and `README.md`
+- [x] Valid YAML in agents and workflows; 8 agents, 18 skills, 18 standards
+
+## Status: COMPLETED
+
+Migration executed. The `game-studio-original` references are kept on purpose in
+`archive/`, and the physical paths of the `examples/warehouse-wms` example were not renamed
+(they are real directory/repo paths, not the brand).
+
+---
+
+## Versión en español
+
 # RoR Command Center — Plan de Migración
 
 > Pivote del framework de **agnóstico / multi-stack** a un **especialista en Ruby on Rails** llamado **RoR Command Center** (slug: `ror-command-center`).
