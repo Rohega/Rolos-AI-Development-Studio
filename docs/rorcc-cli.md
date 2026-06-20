@@ -83,6 +83,9 @@ Requirements: Docker Desktop (enable WSL integration on Windows). The database
 name defaults to the project directory name (e.g. `tallerflow_development`),
 overridable via `DATABASE_NAME` in the generated `.env`.
 
+Full step-by-step onboarding (with troubleshooting and rollback):
+`docs/runbooks/new-project-docker-bootstrap.md`.
+
 ## Backends
 
 - **local** (default): the compiled Ollama model `rorcc-<name>`, fully offline.

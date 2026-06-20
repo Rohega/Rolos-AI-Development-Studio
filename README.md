@@ -157,6 +157,14 @@ rorcc skill create-feature-spec     # run a skill with its responsible agent
 rorcc workflow new-feature          # run a full workflow, phase by phase
 ```
 
+Start a brand-new project with **only Docker** (no local Ruby/Rails):
+
+```bash
+rorcc init --docker tallerflow      # generates a Dockerized Rails app + framework
+```
+
+Step-by-step onboarding: [docs/runbooks/new-project-docker-bootstrap.md](docs/runbooks/new-project-docker-bootstrap.md).
+
 Full command reference: [docs/rorcc-cli.md](docs/rorcc-cli.md). Ollama setup,
 model tiers, hybrid mode, and IDE bridge: [docs/integrations/ollama.md](docs/integrations/ollama.md).
 Local 7–14B models trade quality for privacy and offline use.
