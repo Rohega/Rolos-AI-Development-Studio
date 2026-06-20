@@ -31,12 +31,16 @@ COMMANDS:
   doctor                  Check Ollama, models, and environment
   build-agent <name>      Compile a .ai/agents/<name>.yaml into an Ollama model
   update [name]           Recompile agents after editing .ai/ (all, or just <name>)
-  agent <name>            Chat locally with a compiled agent (needs build-agent first)
+  agent <name> [--cloud]  Chat with an agent (local Ollama by default, --cloud for hybrid)
   help                    Show this help
 
 ENVIRONMENT:
-  RORCC_MODEL   Base Ollama model (default: qwen2.5-coder:7b)
-  OLLAMA_HOST   Ollama endpoint (default: http://localhost:11434)
+  RORCC_MODEL            Base Ollama model (default: qwen2.5-coder:7b)
+  OLLAMA_HOST           Ollama endpoint (default: http://localhost:11434)
+  RORCC_BACKEND         local | cloud (default: local)
+  RORCC_CLOUD_PROVIDER  openai | anthropic (default: openai)
+  RORCC_CLOUD_MODEL     cloud model id (e.g. gpt-4o, claude-3-5-sonnet-latest)
+  OPENAI_API_KEY / ANTHROPIC_API_KEY   cloud credentials
 
 EXAMPLES:
   rorcc init warehouse-wms

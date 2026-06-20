@@ -27,44 +27,11 @@ cmd_build_agent() {
 
   info "Building agent '${C_BOLD}$name${C_RESET}' on base model ${C_DIM}$base_model${C_RESET}"
 
-  # Assemble the SYSTEM prompt into a temp file (avoids arg-length limits).
+  # Assemble the SYSTEM prompt into a file (shared with the cloud backend).
+  . "$RORCC_LIB_DIR/assemble.sh"
   local sys="$build_dir/system.txt"
-  {
-    printf 'You are the "%s" specialist of RoR Command Center, a production-grade Ruby on Rails AI engineering team.\n' "$name"
-    printf 'Follow the role definition and engineering standards below. Stay in character, ask clarifying questions, present options, and never invent files without approval.\n\n'
-    printf '===== ROLE DEFINITION (%s.yaml) =====\n' "$name"
-    cat "$agent_file"
-    printf '\n'
-
-    # Pull every .ai/... path referenced by the agent and inline it.
-    local ref count=0
-    while IFS= read -r ref; do
-      [ -z "$ref" ] && continue
-      local ref_path="$root/$ref"
-      if [ -f "$ref_path" ]; then
-        printf '\n===== STANDARD: %s =====\n' "$ref"
-        cat "$ref_path"
-        count=$((count + 1))
-      fi
-    done < <(grep -oE '\.ai/[A-Za-z0-9_./-]+' "$agent_file" | sort -u)
-    printf '\n' >&2
-    info "inlined $count referenced standard(s)" >&2
-  } > "$sys"
-
-  # Guard the context budget. Small local models (7-14B) have limited windows;
-  # a huge SYSTEM prompt degrades quality. Warn, and optionally hard-cap with
-  # RORCC_MAX_CHARS (the prompt is truncated to that many characters).
-  local chars; chars="$(wc -c < "$sys" | tr -d ' ')"
-  local soft_limit="${RORCC_WARN_CHARS:-32000}"   # ~8k tokens, a safe default
-  if [ -n "${RORCC_MAX_CHARS:-}" ] && [ "$chars" -gt "$RORCC_MAX_CHARS" ]; then
-    head -c "$RORCC_MAX_CHARS" "$sys" > "$sys.cut" && mv "$sys.cut" "$sys"
-    printf '\n[...context truncated to %s chars by RORCC_MAX_CHARS...]\n' "$RORCC_MAX_CHARS" >> "$sys"
-    warn "system prompt truncated to $RORCC_MAX_CHARS chars (was $chars)"
-    chars="$RORCC_MAX_CHARS"
-  elif [ "$chars" -gt "$soft_limit" ]; then
-    warn "system prompt is large (${chars} chars) — may exceed small models' context."
-    warn "set RORCC_MAX_CHARS=<n> to cap it, or use a larger base model."
-  fi
+  assemble_system "$root" "$name" > "$sys"
+  apply_context_budget "$sys"
 
   # Write the Modelfile. Ollama reads SYSTEM as a quoted block.
   {

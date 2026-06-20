@@ -102,6 +102,34 @@ Replies stream token-by-token in `rorcc agent`, so you see output as it's genera
 RORCC_MODEL=qwen2.5-coder:14b rorcc build-agent backend-rails-developer
 ```
 
+## Hybrid mode (local + cloud)
+
+Use local models for everyday tasks and a cloud model for hard architecture work —
+same agents, same assembled prompt. The cloud backend sends the agent's role +
+standards as the system message.
+
+```bash
+# OpenAI (or any OpenAI-compatible endpoint via RORCC_CLOUD_BASE)
+export OPENAI_API_KEY=sk-...
+rorcc agent rails-architect --cloud
+
+# Anthropic
+export ANTHROPIC_API_KEY=sk-ant-...
+export RORCC_CLOUD_PROVIDER=anthropic
+rorcc agent rails-architect --cloud
+```
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `RORCC_BACKEND` | `local` | `local` (Ollama) or `cloud` |
+| `RORCC_CLOUD_PROVIDER` | `openai` | `openai` or `anthropic` |
+| `RORCC_CLOUD_MODEL` | `gpt-4o` / `claude-3-5-sonnet-latest` | Cloud model id |
+| `RORCC_CLOUD_BASE` | `https://api.openai.com/v1` | OpenAI-compatible base URL |
+
+Cloud mode needs no `build-agent` step — the prompt is assembled on the fly.
+`rorcc doctor` reports whether a cloud key is set. Cloud support is best-effort;
+provider APIs change over time.
+
 ## Available agents
 
 `rails-architect`, `backend-rails-developer`, `frontend-react-inertia-developer`,
