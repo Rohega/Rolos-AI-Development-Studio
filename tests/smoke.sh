@@ -29,6 +29,9 @@ done
 printf '\ncommands:\n'
 assert_exit 0 "rorcc help"                 -- "$RORCC" help
 assert_exit 2 "unknown command -> 2"       -- "$RORCC" frobnicate
+assert_exit 2 "init (no arg) -> 2"         -- "$RORCC" init
+assert_exit 2 "init bad flag -> 2"         -- "$RORCC" init --bogus
+assert_exit 2 "init --docker (no dir) -> 2" -- "$RORCC" init --docker
 assert_exit 2 "build-agent (no arg) -> 2"  -- "$RORCC" build-agent
 assert_exit 1 "build-agent bad name -> 1"  -- "$RORCC" build-agent does-not-exist
 assert_exit 2 "agent (no arg) -> 2"        -- "$RORCC" agent
