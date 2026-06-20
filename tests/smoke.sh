@@ -32,6 +32,9 @@ assert_exit 2 "unknown command -> 2"       -- "$RORCC" frobnicate
 assert_exit 2 "build-agent (no arg) -> 2"  -- "$RORCC" build-agent
 assert_exit 1 "build-agent bad name -> 1"  -- "$RORCC" build-agent does-not-exist
 assert_exit 2 "agent (no arg) -> 2"        -- "$RORCC" agent
+assert_exit 2 "agent bad flag -> 2"        -- "$RORCC" agent rails-architect --bogus
+# Cloud without credentials/jq must fail cleanly (exit 1), never hang.
+assert_exit 1 "agent --cloud (no key) -> 1" -- env -u OPENAI_API_KEY -u ANTHROPIC_API_KEY "$RORCC" agent rails-architect --cloud
 
 printf '\nbuild-agent codegen (no Ollama needed):\n'
 TMP="$(mktemp -d)"; export HOME="$TMP"

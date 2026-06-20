@@ -86,6 +86,15 @@ cmd_doctor() {
     fi
   fi
 
+  # 8) Cloud backend (optional, hybrid mode) — informational only.
+  if [ -n "${OPENAI_API_KEY:-}" ]; then
+    ok "cloud ready: OPENAI_API_KEY set (use 'rorcc agent <name> --cloud')"
+  elif [ -n "${ANTHROPIC_API_KEY:-}" ]; then
+    ok "cloud ready: ANTHROPIC_API_KEY set (use 'rorcc agent <name> --cloud')"
+  else
+    info "cloud backend optional — set OPENAI_API_KEY or ANTHROPIC_API_KEY to enable --cloud"
+  fi
+
   printf '\n'
   if [ "$problems" -eq 0 ]; then
     ok "all checks passed — try: rorcc build-agent rails-architect"
