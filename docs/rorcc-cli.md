@@ -28,6 +28,7 @@ Runtime dependencies (verified by `rorcc doctor`): [Ollama](https://ollama.com/)
 |---------|-------------|
 | `rorcc` | Interactive menu — pick a specialist by number (best for non-devs) |
 | `rorcc init <project>` | Scaffold a new project with the `.ai/` framework |
+| `rorcc init --docker <project>` | Scaffold a full Dockerized Rails app (MySQL, no local Ruby/Rails) + framework |
 | `rorcc doctor` | Check Ollama, models, RAM, and cloud-key readiness |
 | `rorcc build-agent <name>` | Compile `.ai/agents/<name>.yaml` (+ standards) into model `rorcc-<name>` |
 | `rorcc update [name]` | Recompile agents after editing `.ai/` (all, or just one) |
@@ -62,6 +63,25 @@ After editing an agent or standard under `.ai/`:
 ```bash
 rorcc update                     # rebuild every compiled agent
 ```
+
+## Docker bootstrap (no local Ruby/Rails)
+
+`rorcc init --docker <project>` creates a complete, runnable Rails app using only
+Docker on the host — no Ruby, Rails, or Node installed locally. It generates the
+app inside a throwaway `ruby:3.3` container, drops in a generic **MySQL** dev
+stack (`Dockerfile.dev`, `docker-compose.yml`, entrypoint, `config/database.yml`),
+installs the `.ai/` framework, and initializes git.
+
+```bash
+rorcc init --docker tallerflow
+cd tallerflow
+docker compose run --rm web rails db:create db:migrate
+docker compose up                # -> http://localhost:3000
+```
+
+Requirements: Docker Desktop (enable WSL integration on Windows). The database
+name defaults to the project directory name (e.g. `tallerflow_development`),
+overridable via `DATABASE_NAME` in the generated `.env`.
 
 ## Backends
 

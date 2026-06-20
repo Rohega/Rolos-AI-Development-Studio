@@ -28,6 +28,7 @@ USAGE:
 COMMANDS:
   menu                    Interactive launcher: pick a specialist by number
   init <project>          Scaffold a new project with the .ai/ framework
+  init --docker <project> Scaffold a full Dockerized Rails app (MySQL, no local Ruby)
   doctor                  Check Ollama, models, and environment
   build-agent <name>      Compile a .ai/agents/<name>.yaml into an Ollama model
   update [name]           Recompile agents after editing .ai/ (all, or just <name>)
@@ -47,6 +48,7 @@ ENVIRONMENT:
 
 EXAMPLES:
   rorcc init warehouse-wms
+  rorcc init --docker tallerflow
   rorcc doctor
   rorcc build-agent rails-architect
   rorcc agent rails-architect
@@ -54,9 +56,27 @@ EOF
 }
 
 cmd_init() {
-  local target="${1:-}"
+  local docker=0 target=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --docker) docker=1 ;;
+      -*) err "unknown option: $1"; return 2 ;;
+      *)
+        if [ -n "$target" ]; then err "unexpected argument: $1"; return 2; fi
+        target="$1"
+        ;;
+    esac
+    shift
+  done
+
+  if [ "$docker" -eq 1 ]; then
+    . "$RORCC_LIB_DIR/init_docker.sh"
+    cmd_init_docker "$target"
+    return $?
+  fi
+
   if [ -z "$target" ]; then
-    err "usage: rorcc init <project-dir>"
+    err "usage: rorcc init [--docker] <project-dir>"
     return 2
   fi
   local installer="$RORCC_HOME/install.sh"

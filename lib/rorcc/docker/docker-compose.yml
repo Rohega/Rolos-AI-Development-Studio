@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DATABASE_NAME:-app}_development
+    ports:
+      - "${MYSQL_PORT:-3307}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD:-root}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    entrypoint: ["/app/bin/docker-entrypoint.sh"]
+    command: ["rails", "server", "-b", "0.0.0.0"]
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - node_modules_cache:/app/node_modules
+    ports:
+      - "${RAILS_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: db
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      DATABASE_NAME: ${DATABASE_NAME:-app}
+    stdin_open: true
+    tty: true
+
+volumes:
+  mysql_data:
+  bundle_cache:
+  node_modules_cache:
