@@ -34,6 +34,8 @@ cmd_init_docker() {
     -v "$target:/output" \
     -v "$assets:/assets:ro" \
     -e ASSETS_DIR=/assets \
+    -e "HOST_UID=$(id -u)" \
+    -e "HOST_GID=$(id -g)" \
     -e "RAILS_NEW_ARGS=--database=mysql --css=tailwind --javascript=esbuild --skip-git" \
     -w /output \
     ruby:3.3-bookworm \
@@ -48,6 +50,10 @@ cmd_init_docker() {
 
   info "Building the development image..."
   ( cd "$target" && docker compose build && docker compose run --rm web bundle install )
+
+  # bundle install writes Gemfile.lock as root inside the container; reclaim it.
+  docker run --rm -v "$target:/output" -w /output ruby:3.3-bookworm \
+    chown -R "$(id -u):$(id -g)" /output
 
   if [ ! -d "$target/.git" ]; then
     info "Initializing git repository..."
