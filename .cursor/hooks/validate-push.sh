@@ -26,6 +26,10 @@ fi
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 MATCHED=""
+# ponytail: greps the whole command string for a protected branch name, so a
+# chained command like `git push origin feat && gh pr create --base main` false-
+# positives on "main". upgrade: parse only the push refspec (last arg / explicit
+# <remote> <ref>) instead of scanning the entire command, when this bites often.
 for branch in develop main master; do
     if [ "$CURRENT_BRANCH" = "$branch" ]; then
         MATCHED="$branch"; break
