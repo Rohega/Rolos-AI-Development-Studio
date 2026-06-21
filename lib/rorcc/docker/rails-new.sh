@@ -32,4 +32,12 @@ mkdir -p bin
 cp "${ASSETS}/docker-entrypoint.sh" bin/
 chmod +x bin/docker-entrypoint.sh
 
+# rails new runs as root inside the container, so the generated files are owned
+# by root on the host. Hand them back to the invoking user so host-side tools
+# (install.sh, git) can write to them.
+if [[ -n "${HOST_UID:-}" && -n "${HOST_GID:-}" ]]; then
+  echo "==> Restoring ownership to ${HOST_UID}:${HOST_GID}..."
+  chown -R "${HOST_UID}:${HOST_GID}" /output
+fi
+
 echo "==> Rails bootstrap complete."
