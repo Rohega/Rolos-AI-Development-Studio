@@ -42,6 +42,7 @@ All rules reference a canonical standard in `.ai/` — they never duplicate it.
 
 | Cursor Rule | Canonical Standard |
 |-------------|-------------------|
+| `ai-index.mdc` | `.ai/` router — loads the core standards every chat and routes agents/skills/workflows/domain standards |
 | `project-structure.mdc` | `.ai/` layout |
 | `workflow-gates.mdc` | `.ai/workflows/new-feature.yaml`, `.ai/standards/project-bootstrap.md` |
 | `rails.mdc` | `.ai/standards/development.md` |
@@ -60,12 +61,15 @@ All rules reference a canonical standard in `.ai/` — they never duplicate it.
 | `documentation.mdc` | `.ai/standards/documentation.md` |
 
 **Why some rules always apply and others don't:**
-`project-structure.mdc`, `minimalism.mdc`, and `workflow-gates.mdc` are
-`alwaysApply: true`, so they load in every chat — `workflow-gates.mdc` keeps the
-Definition of Done (RSpec tests, review, QA, docs) in scope even on greenfield
-projects where no files match the globs yet. The rest activate by file glob
-(e.g. `rails.mdc` activates when you touch `app/**/*.rb`). You can also force any
-rule by `@`-mentioning its file.
+`ai-index.mdc`, `project-structure.mdc`, `minimalism.mdc`, and
+`workflow-gates.mdc` are `alwaysApply: true`, so they load in every chat.
+`ai-index.mdc` is the **router**: it `@`-loads the 9 core standards (collaboration,
+minimalism, development, project-bootstrap, testing, security, git-workflow,
+code-review, documentation) and lists every agent, skill, workflow, and domain
+standard so the agent always considers `.ai/` — even on greenfield projects or
+non-Ruby work where no glob matches. `workflow-gates.mdc` keeps the Definition of
+Done in scope. The domain rules activate by file glob (e.g. `rails.mdc` activates
+when you touch `app/**/*.rb`). You can also force any rule by `@`-mentioning its file.
 
 **Hard gates (`.cursor/hooks.json`):** beyond advisory rules, Cursor hooks
 deterministically block direct pushes to `main`/`master`/`develop`, flag staged

@@ -46,6 +46,19 @@ RoR Command Center structures AI-assisted Rails engineering like a real senior t
 
 You stay in control. Agents ask questions, present options, draft artifacts, and wait for approval before writing files.
 
+### How it stays in effect
+
+Everything lives in **`.ai/` — the single source of truth**. Platform folders
+(`.cursor/`, `.claude/`, `AGENTS.md`, `.github/`) are thin adapters that point to
+it, never copies. A **router** guarantees `.ai/` is always considered: the 9 core
+standards (collaboration, minimalism, development, project-bootstrap, testing,
+security, git-workflow, code-review, documentation) load in every session, and
+domain standards (frontend, API, data, async, auth, infra, legacy) load on demand
+when you touch their area. In Cursor this is `.cursor/rules/ai-index.mdc`; in
+Claude `CLAUDE.md`; in Codex/Copilot `AGENTS.md` / `copilot-instructions.md`.
+
+New here? Start with the **[User Manual](docs/USER-MANUAL.md)**.
+
 ---
 
 ## Available Specialists
@@ -194,7 +207,8 @@ The script copies the framework **core** into your project and creates an empty 
 | `--with-examples` | Also copy `examples/` and the warehouse example docs |
 | `-h`, `--help` | Show usage |
 
-Full step-by-step guide: [docs/INSTALL.md](docs/INSTALL.md).
+Full step-by-step guide: [docs/INSTALL.md](docs/INSTALL.md). New to the framework?
+Read the [User Manual](docs/USER-MANUAL.md).
 
 **Prerequisites (recommended):**
 - Git, Bash
@@ -215,7 +229,7 @@ Full step-by-step guide: [docs/INSTALL.md](docs/INSTALL.md).
   standards/            # Engineering rules (Rails, AWS, PostgreSQL/MySQL, …)
   templates/            # Document templates
 
-.cursor/rules/          # Cursor adapter → .ai/standards/ (workflow-gates.mdc always applies)
+.cursor/rules/          # Cursor adapter → .ai/standards/ (ai-index.mdc router + workflow-gates.mdc always apply)
 .cursor/hooks.json      # Cursor hard gates (protected-branch push block, secret/commit checks)
 .cursor/hooks/          # Cursor hook scripts
 .claude/                # Claude Code adapter → .ai/
@@ -232,7 +246,7 @@ archive/game-studio-original/   # Previous game-studio framework (preserved)
 ## How to Use with Cursor
 
 1. Open the project in Cursor — rules in `.cursor/rules/` load automatically.
-2. `project-structure.mdc`, `minimalism.mdc`, and `workflow-gates.mdc` always apply; others activate by file glob.
+2. `ai-index.mdc` (the `.ai/` router), `project-structure.mdc`, `minimalism.mdc`, and `workflow-gates.mdc` always apply; others activate by file glob. `ai-index.mdc` loads the core standards every chat so `.ai/` is always considered.
 3. `workflow-gates.mdc` enforces the Definition of Done (RSpec tests, review, QA, docs) even on greenfield projects; `.cursor/hooks.json` adds hard gates (e.g. blocks direct push to `main`).
 4. **New to this?** Follow the 5-minute quickstart in [docs/integrations/cursor.md](docs/integrations/cursor.md#quickstart-5-minutes).
 5. Plan in **Ask mode**, then switch to **Agent mode** to implement.

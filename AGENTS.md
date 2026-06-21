@@ -4,6 +4,22 @@ Production-grade Ruby on Rails AI engineering team. **Canonical definitions live
 
 Do not duplicate content here; reference the source of truth.
 
+## Router — do this on every task
+
+`.ai/` is the source of truth and works as a team. Before planning or coding,
+**read the relevant standards in `.ai/standards/`**. The core always applies:
+`collaboration` · `minimalism` · `development` · `project-bootstrap` · `testing` ·
+`security` · `git-workflow` · `code-review` · `documentation`. Then add the
+domain standard for the area you touch:
+
+- Frontend/UI → `frontend` · `hotwire` · `ux-accessibility`
+- API → `api-design` · Data → `postgresql` / `mysql` · Async → `sidekiq-activejob`
+- Auth/Admin → `devise-auth` / `activeadmin` · Infra → `aws-infrastructure` / `kamal-docker`
+- Legacy → `legacy-rails`
+
+Full navigable index: `.ai/README.md`. Cursor loads this automatically via
+`.cursor/rules/ai-index.mdc`; other tools load this file (`AGENTS.md`).
+
 ## Always apply
 
 - **Standards** in `.ai/standards/` govern every change. Minimalism (`.ai/standards/minimalism.md`) and the project structure are non-negotiable defaults.
