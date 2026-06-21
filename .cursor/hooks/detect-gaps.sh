@@ -12,6 +12,11 @@ if [ ! -d ".ai" ]; then
     GAPS="$GAPS\n- .ai/ directory missing — RoR Command Center not installed correctly."
 fi
 
+# The .ai router must be present so the agent always considers .ai standards.
+if [ -d ".cursor/rules" ] && [ ! -f ".cursor/rules/ai-index.mdc" ]; then
+    GAPS="$GAPS\n- .cursor/rules/ai-index.mdc missing — the .ai router is not installed; re-run install.sh --force."
+fi
+
 # Rails app present but no test stack -> RSpec not bootstrapped
 if [ -f "Gemfile" ]; then
     if [ ! -d "spec" ] && [ ! -d "test" ]; then

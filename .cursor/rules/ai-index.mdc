@@ -1,0 +1,77 @@
+---
+description: RoR Command Center — índice/router de .ai. Carga el núcleo del equipo y enruta agents/skills/workflows/standards de dominio.
+alwaysApply: true
+---
+
+# RoR Command Center — Router de `.ai` (fuente única de verdad)
+
+`.ai/` es el equipo y la fuente única de verdad. Antes de planear o escribir
+código: identifica las piezas que aplican y **léelas con la herramienta de
+lectura**. El núcleo transversal ya está cargado abajo; el resto se lee
+on-demand según el dominio de la tarea. No dupliques contenido de `.ai/` en
+otros sitios — apunta a él.
+
+## Núcleo (siempre presente — el equipo base)
+
+@.ai/standards/collaboration.md
+@.ai/standards/minimalism.md
+@.ai/standards/development.md
+@.ai/standards/project-bootstrap.md
+@.ai/standards/testing.md
+@.ai/standards/security.md
+@.ai/standards/git-workflow.md
+@.ai/standards/code-review.md
+@.ai/standards/documentation.md
+
+## Standards de dominio — LÉELOS en cuanto toques su área (`.ai/standards/`)
+
+- Frontend/UI → `frontend.md` · `hotwire.md` · `ux-accessibility.md`
+- API → `api-design.md`
+- Datos → `postgresql.md` · `mysql.md`
+- Async → `sidekiq-activejob.md`
+- Auth/Admin → `devise-auth.md` · `activeadmin.md`
+- Infra/Deploy → `aws-infrastructure.md` · `kamal-docker.md`
+- Legacy → `legacy-rails.md`
+
+> Estos también se auto-activan por glob desde sus reglas `.mdc` específicas
+> cuando abres archivos del dominio. El router garantiza que se consideren
+> incluso cuando ninguna regla por glob se dispara (repos nuevos, trabajo no-Ruby).
+
+## Agents — adopta el rol que corresponda (`.ai/agents/*.yaml`)
+
+| Tarea | Rol |
+|-------|-----|
+| Scope, specs, historias de usuario | `product-owner` |
+| Arquitectura, modelado, ADRs, migraciones | `rails-architect` |
+| Modelos, servicios, jobs, APIs | `backend-rails-developer` |
+| Hotwire / React + Inertia | `frontend-react-inertia-developer` |
+| AWS, CI/CD, deploy, releases | `aws-devops-engineer` |
+| QA, planes de prueba, revisión | `qa-engineer` |
+| Documentación, runbooks, onboarding | `documentation-writer` |
+| Revisión y remediación de seguridad | `security-reviewer` |
+
+## Workflows — sigue el proceso completo (`.ai/workflows/*.yaml`)
+
+`new-feature` · `legacy-onboarding` · `production-incident` · `aws-deployment`
+
+## Skills — invoca la capacidad (`.ai/skills/<name>/SKILL.md`)
+
+`create-feature-spec` · `create-user-stories` · `create-architecture-plan` ·
+`create-api-endpoints` · `create-ux-spec` · `review-rails-models` ·
+`review-db-migrations` · `sql-review` · `qa-plan` · `document-module` ·
+`security-audit` · `ponytail-review` · `ponytail-audit` · `ponytail-debt` ·
+`release-checklist` · `capistrano-review` · `nginx-puma-review` ·
+`aws-deploy-plan` · `reverse-document-legacy` · `tech-debt-analysis` ·
+`ocr-pipeline` · `whatsapp-integration`
+
+## Templates al generar artefactos (`.ai/templates/*.md`)
+
+`feature-specification` · `architecture-decision-record` ·
+`technical-design-document` · `ux-specification` · `qa-test-plan` ·
+`deployment-plan` · `release-checklist` · `incident-postmortem` ·
+`legacy-module-audit` · `modernization-plan` · `retrospective-adr`
+
+## Definition of Done (no negociable)
+
+Tests RSpec · `ponytail-review` · `qa-plan` · documentación · rama `feature/`.
+Detalle en `.cursor/rules/workflow-gates.mdc`.

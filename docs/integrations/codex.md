@@ -1,15 +1,33 @@
 # OpenAI Codex Integration
 
-Codex does not read project files automatically. Load context explicitly at session start.
+Modern Codex auto-loads `AGENTS.md` from the project root, which now carries the
+`.ai/` router (core standards + domain routing). For deeper context, load the
+relevant `.ai/` files explicitly at session start.
 
 ## Minimum Context
 
-Paste or attach:
+`AGENTS.md` loads automatically and points to the team. When you need the full
+behavior, paste or attach:
+
+**Core standards (the team — always relevant):**
 
 1. `.ai/standards/collaboration.md`
-2. `.ai/standards/development.md`
-3. The agent YAML: `.ai/agents/<role>.yaml`
-4. The skill: `.ai/skills/<skill>/SKILL.md`
+2. `.ai/standards/minimalism.md`
+3. `.ai/standards/development.md`
+4. `.ai/standards/project-bootstrap.md`
+5. `.ai/standards/testing.md`
+6. `.ai/standards/security.md`
+7. `.ai/standards/git-workflow.md`
+8. `.ai/standards/code-review.md`
+9. `.ai/standards/documentation.md`
+
+**Plus, for the task at hand:**
+
+- The domain standard for the area you touch (e.g. `.ai/standards/api-design.md`)
+- The agent YAML: `.ai/agents/<role>.yaml`
+- The skill: `.ai/skills/<skill>/SKILL.md`
+
+Full navigable index: `.ai/README.md`.
 
 ## Example Prompt
 

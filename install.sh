@@ -40,6 +40,7 @@ CORE_ITEMS=(
   "docs/integrations"
   "docs/CLAUDE.md"
   "docs/COLLABORATIVE-DESIGN-PRINCIPLE.md"
+  "docs/USER-MANUAL.md"
   ".github/copilot-instructions.md"
 )
 
@@ -86,7 +87,7 @@ OPTIONS:
 WHAT GETS COPIED (core):
   .ai/  .cursor/ (rules + hooks.json + hooks/)  .claude/{agents,hooks,skills,settings.json}
   AGENTS.md  CLAUDE.md  docs/integrations/  docs/CLAUDE.md
-  docs/COLLABORATIVE-DESIGN-PRINCIPLE.md
+  docs/COLLABORATIVE-DESIGN-PRINCIPLE.md  docs/USER-MANUAL.md
   .github/copilot-instructions.md
   + empty docs/ scaffolding (architecture, specs, stories, design, runbooks, modules)
 
@@ -290,6 +291,7 @@ else
   log ""
   log "${C_GREEN}Done.${C_RESET} Next steps:"
   log "  1. cd $TARGET"
-  log "  2. Open in Cursor (rules in .cursor/rules/ load automatically) or run 'claude'."
-  log "  3. See docs/integrations/ for your AI platform setup."
+  log "  2. Open in Cursor or run 'claude'. The .ai/ router loads automatically:"
+  log "     Cursor → .cursor/rules/ai-index.mdc · Claude → CLAUDE.md · Codex/Copilot → AGENTS.md."
+  log "  3. Read docs/USER-MANUAL.md to get started; docs/integrations/ has per-platform setup."
 fi
