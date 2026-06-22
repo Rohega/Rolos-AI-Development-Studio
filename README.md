@@ -262,7 +262,7 @@ latest framework and re-run the installer:
 
 ```bash
 cd ror-command-center && git pull
-./install.sh --backup /path/to/your-project   # --backup keeps .bak copies of changes
+./install.sh --force --backup /path/to/your-project   # --force refreshes files; --backup keeps .bak copies
 ```
 
 Only edit files under `.ai/` (and project-specific docs); never hand-edit the
