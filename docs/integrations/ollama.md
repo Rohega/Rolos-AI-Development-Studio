@@ -39,23 +39,30 @@ Pick a base model by RAM (see `ollama/models.yaml`):
 
 ## Easy install (non-technical users)
 
-One command installs everything (Ollama, a model, the `rorcc` CLI, and the
+One command installs everything (Ollama, `jq`, a model, the `rorcc` CLI, and the
 specialists), then you just type `rorcc` and pick from a menu. Works on Linux,
 macOS, and Windows + WSL.
 
+**Already cloned the repo? This is the easiest** — it prompts once, so it just works:
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | bash
+cd ror-command-center && ./setup.sh
 ```
 
-The script asks for **one** confirmation, then runs on its own. It detects your
-RAM, picks a suitable model, and is **idempotent** (safe to re-run). When done:
+Prefer a remote one-liner? Piped into `bash` it runs **non-interactively**, so
+accept upfront with `RORCC_YES=1`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | RORCC_YES=1 bash
+```
+
+The script asks for **one** confirmation (when run from the clone), then runs on
+its own. It detects your RAM, picks a suitable model, and is **idempotent** (safe
+to re-run). When done:
 
 ```bash
 rorcc            # opens an interactive menu — pick a specialist by number
 ```
-
-> Running piped/non-interactively? Accept upfront with:
-> `curl -fsSL <url>/setup.sh | RORCC_YES=1 bash`
 
 ## Quickstart (manual / developers)
 

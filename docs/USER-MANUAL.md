@@ -155,9 +155,15 @@ CLI `rorcc` y compila los especialistas (`setup.sh` corre el chequeo de equipo
 automáticamente y elige el modelo por ti):
 
 ```bash
-cd ror-command-center
-./setup.sh
-rorcc              # menú interactivo: elige un especialista por número
+cd ror-command-center && ./setup.sh   # pregunta una vez e instala todo
+rorcc                                 # menú interactivo: elige un especialista por número
+```
+
+¿Prefieres un one-liner remoto? Por el pipe corre **sin interacción**, así que
+acéptalo de antemano con `RORCC_YES=1`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | RORCC_YES=1 bash
 ```
 
 Comandos útiles después de instalar:

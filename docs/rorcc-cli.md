@@ -7,10 +7,17 @@ are generated from it, never duplicated by hand.
 
 ## Install
 
-Non-technical, one command (Linux/macOS/WSL):
+Non-technical, one command (Linux/macOS/WSL). Already cloned the repo:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | bash
+cd ror-command-center && ./setup.sh
+```
+
+Or a remote one-liner — piped into `bash` it runs non-interactively, so accept
+upfront with `RORCC_YES=1`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | RORCC_YES=1 bash
 ```
 
 Manual:

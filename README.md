@@ -115,11 +115,20 @@ install. A GPU is optional but speeds inference up significantly. On **Windows +
 WSL2**, raise the WSL memory limit in `.wslconfig` if needed (models need their
 full size free in RAM).
 
-Non-technical? One command sets up everything:
+Non-technical? One command sets up everything (Ollama, `jq`, a model, the `rorcc`
+CLI, and the specialists). **Already cloned the repo? This is the easiest** — it
+prompts once, so it just works:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | bash
-rorcc                               # interactive menu — pick a specialist by number
+cd ror-command-center && ./setup.sh   # asks once, then installs everything
+rorcc                                 # interactive menu — pick a specialist by number
+```
+
+Prefer a remote one-liner? Piped into `bash` it runs **non-interactively**, so
+accept upfront with `RORCC_YES=1`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rohega/ror-command-center/main/setup.sh | RORCC_YES=1 bash
 ```
 
 Developers / manual setup:
