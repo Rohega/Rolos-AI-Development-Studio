@@ -155,6 +155,19 @@ Full command reference: [docs/rorcc-cli.md](docs/rorcc-cli.md). Ollama setup,
 model tiers, hybrid mode, and IDE bridge: [docs/integrations/ollama.md](docs/integrations/ollama.md).
 Local 7–14B models trade quality for privacy and offline use.
 
+Changed your mind? Undo what `setup.sh` installed with `uninstall.sh` (or
+`rorcc uninstall`). It is interactive and previewable with `--dry-run`:
+
+```bash
+./uninstall.sh                 # remove compiled agents, the rorcc CLI, the downloaded framework
+./uninstall.sh --models        # also delete the downloaded base models (several GB)
+./uninstall.sh --ollama        # also uninstall Ollama itself (binary, service, ~/.ollama)
+./uninstall.sh --project DIR   # remove framework files copied into a project by install.sh
+```
+
+It never removes `jq`/`zstd`/`git` (general tools) and, in `--project` mode, keeps
+docs folders that contain your own files.
+
 ---
 
 ## Start a new project with Docker (only Docker required)

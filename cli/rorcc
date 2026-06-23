@@ -36,6 +36,7 @@ COMMANDS:
   skill <name> [--cloud]  Run a .ai/skills/<name> skill with its responsible agent
   workflow <name> [--cloud]  Run a .ai/workflows/<name> end to end, phase by phase
   proxy [--start]         Show IDE (Cursor/Claude Code) config; --start runs a LiteLLM gateway
+  uninstall [opts]        Remove what setup.sh installed (agents, CLI, framework; --ollama/--models/--project)
   help                    Show this help
 
 ENVIRONMENT:
@@ -90,6 +91,15 @@ cmd_init() {
   ok "next: cd $target && rorcc doctor"
 }
 
+cmd_uninstall() {
+  local script="$RORCC_HOME/uninstall.sh"
+  if [ ! -f "$script" ]; then
+    err "uninstall.sh not found at $script (run from the cloned repo)"
+    return 1
+  fi
+  bash "$script" "$@"
+}
+
 main() {
   # No command → friendly interactive menu (built for non-technical users).
   local cmd="${1:-menu}"
@@ -104,6 +114,7 @@ main() {
     skill)        . "$RORCC_LIB_DIR/skill.sh";       cmd_skill "$@" ;;
     workflow)     . "$RORCC_LIB_DIR/workflow.sh";    cmd_workflow "$@" ;;
     proxy)        . "$RORCC_LIB_DIR/proxy.sh";       cmd_proxy "$@" ;;
+    uninstall)    cmd_uninstall "$@" ;;
     help|-h|--help) usage ;;
     *) err "unknown command: $cmd"; printf '\n'; usage; exit 2 ;;
   esac

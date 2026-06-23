@@ -210,6 +210,25 @@ rorcc init --docker tallerflow   # genera la app Rails dockerizada + framework
 Guía paso a paso (EN/ES), con comandos, troubleshooting y rollback:
 `docs/runbooks/new-project-docker-bootstrap.md`.
 
+### 3.4 Desinstalar / limpiar (`uninstall.sh`)
+
+¿Quieres revertir lo que instaló `setup.sh`? Usa `./uninstall.sh` (o `rorcc
+uninstall`). Es interactivo —pregunta por cada grupo— y puedes previsualizarlo
+con `--dry-run` antes de borrar nada.
+
+```bash
+./uninstall.sh                 # especialistas compilados, comando 'rorcc', framework descargado
+./uninstall.sh --models        # además borra los modelos base descargados (varios GB)
+./uninstall.sh --ollama        # además desinstala Ollama por completo (binario, servicio, ~/.ollama)
+./uninstall.sh --project <dir> # borra de <dir> los archivos que copió install.sh
+./uninstall.sh --dry-run       # muestra qué se borraría, sin tocar nada
+```
+
+> **Seguridad.** No toca `jq`, `zstd` ni `git` (utilidades generales). En modo
+> `--project`, conserva las carpetas de `docs/` que contengan archivos tuyos
+> (specs, ADRs, etc.) y nunca borra el código de tu app. Desinstalar Ollama en
+> Linux pide `sudo` (binario y servicio del sistema).
+
 ---
 
 ## 4. Uso diario
