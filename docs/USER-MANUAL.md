@@ -175,6 +175,13 @@ rorcc skill create-feature-spec
 rorcc workflow new-feature
 ```
 
+> **Dónde ejecutar `rorcc`.** Los comandos que leen el framework (`agent`,
+> `skill`, `workflow`, `build-agent`, `update`, `doctor`) necesitan encontrar la
+> carpeta `.ai/`. Ejecútalos **dentro de una carpeta que la contenga**: un
+> proyecto creado con `rorcc init <nombre>` o el repositorio clonado. Desde
+> cualquier otra carpeta verás `no .ai/ framework found`. Si instalaste con el
+> one-liner `curl … | bash`, el framework queda en `~/.ror-command-center`.
+
 En **Windows + WSL2**, sube el límite de memoria de WSL en `.wslconfig` si hace
 falta (el modelo necesita su tamaño completo libre en RAM). Guía completa de la
 ruta local: `docs/integrations/ollama.md`.
@@ -202,6 +209,25 @@ rorcc init --docker tallerflow   # genera la app Rails dockerizada + framework
 
 Guía paso a paso (EN/ES), con comandos, troubleshooting y rollback:
 `docs/runbooks/new-project-docker-bootstrap.md`.
+
+### 3.4 Desinstalar / limpiar (`uninstall.sh`)
+
+¿Quieres revertir lo que instaló `setup.sh`? Usa `./uninstall.sh` (o `rorcc
+uninstall`). Es interactivo —pregunta por cada grupo— y puedes previsualizarlo
+con `--dry-run` antes de borrar nada.
+
+```bash
+./uninstall.sh                 # especialistas compilados, comando 'rorcc', framework descargado
+./uninstall.sh --models        # además borra los modelos base descargados (varios GB)
+./uninstall.sh --ollama        # además desinstala Ollama por completo (binario, servicio, ~/.ollama)
+./uninstall.sh --project <dir> # borra de <dir> los archivos que copió install.sh
+./uninstall.sh --dry-run       # muestra qué se borraría, sin tocar nada
+```
+
+> **Seguridad.** No toca `jq`, `zstd` ni `git` (utilidades generales). En modo
+> `--project`, conserva las carpetas de `docs/` que contengan archivos tuyos
+> (specs, ADRs, etc.) y nunca borra el código de tu app. Desinstalar Ollama en
+> Linux pide `sudo` (binario y servicio del sistema).
 
 ---
 
@@ -295,6 +321,9 @@ Detalle: `.cursor/rules/workflow-gates.mdc` y `.ai/workflows/new-feature.yaml`.
 
 | Síntoma | Causa probable | Solución |
 |---------|----------------|----------|
+| `no .ai/ framework found` | Estás fuera de una carpeta con `.ai/` | `cd` a tu proyecto (`rorcc init`) o al repo clonado (`~/.ror-command-center`) y reintenta |
+| Falla la instalación de Ollama al descomprimir | Falta `zstd` (Linux mínimo/WSL) | `sudo apt-get install zstd` y vuelve a correr `setup.sh` |
+| Tras `curl … \| bash` no aparece `rorcc` ni los especialistas | Versión antigua del one-liner sin auto-descarga | Re-ejecuta `setup.sh` (ahora clona el framework en `~/.ror-command-center`) o clónalo a mano |
 | El agente ignora los standards | El router no se instaló | `test -f .cursor/rules/ai-index.mdc`; re-ejecuta `install.sh --force` |
 | Una regla de dominio no se activa | Tipo de archivo no coincide con el glob | `@`-menciona el standard o la regla |
 | El agente edita sin preguntar | Estás en modo Agent | Pide "pregunta antes de editar" o planifica en modo Ask |

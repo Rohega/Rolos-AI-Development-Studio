@@ -29,6 +29,13 @@ Manual:
 Runtime dependencies (verified by `rorcc doctor`): [Ollama](https://ollama.com/),
 `curl`, and `jq`. Ollama is external (installed separately), like Postgres or Docker.
 
+## Uninstall
+
+Undo it with `./uninstall.sh` (or `rorcc uninstall`) — interactive, previewable
+with `--dry-run`. `--models` also deletes base models, `--ollama` removes Ollama
+itself, and `--project <dir>` removes framework files copied into a project.
+It leaves `jq`/`zstd`/`git` alone and keeps your own files in `--project` mode.
+
 ## Commands
 
 | Command | Description |
@@ -43,6 +50,7 @@ Runtime dependencies (verified by `rorcc doctor`): [Ollama](https://ollama.com/)
 | `rorcc skill <name> [--cloud]` | Run a `.ai/skills/<name>` skill with its responsible agent |
 | `rorcc workflow <name> [--cloud]` | Run a `.ai/workflows/<name>` end to end, phase by phase |
 | `rorcc proxy [--start]` | Show IDE (Cursor/Claude Code) config; `--start` runs a LiteLLM gateway |
+| `rorcc uninstall [opts]` | Remove what `setup.sh` installed (`--models`, `--ollama`, `--project <dir>`, `--dry-run`) |
 | `rorcc help` | Show usage |
 
 In a chat session: type your message, `/reset` clears history, `/exit` quits.
