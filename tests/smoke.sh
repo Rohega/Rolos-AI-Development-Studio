@@ -60,6 +60,11 @@ else
 fi
 rm -rf "$ROOT/.rorcc" "$TMP"
 
+printf '\ninstall.sh excludes archive/:\n'
+INSTOUT="$(cd "$ROOT" && ./install.sh --dry-run "$(mktemp -d)" 2>&1)"
+printf '%s\n' "$INSTOUT" | grep -qi 'archive/' && bad "archive/ leaked into install" || ok "archive/ not copied"
+printf '%s\n' "$INSTOUT" | grep -q '\.ai/' && ok ".ai/ is copied (sanity)" || bad ".ai/ missing from install"
+
 printf '\nworkflow parsing:\n'
 WFOUT="$(cd "$ROOT" && bash -c '. lib/rorcc/workflow.sh; _parse_phases .ai/workflows/new-feature.yaml')"
 nlines="$(printf '%s\n' "$WFOUT" | grep -c .)"

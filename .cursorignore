@@ -1,0 +1,8 @@
+# Cursor indexing excludes — keep the skill/agent picker focused on this project.
+
+# Historical template the repo was seeded from (a game-studio framework).
+# Kept for reference, but its 70+ legacy SKILL.md files are NOT part of
+# RoR Command Center and only add noise to Cursor's skill picker.
+# Already excluded from install.sh (allowlist), so cloned projects never
+# receive it; this only stops local Cursor indexing.
+archive/
